@@ -1,0 +1,20 @@
+<h2>Upcoming Tours!</h2>
+
+<div id="tour-container">
+  @if(tourService.dummyTours.length > 0) { @for (tour of tourService.dummyTours;
+  track $index) {
+  <div class="tour-card">
+    <div class="img-container">
+      <img src="https://placehold.co/600x400" alt="" />
+    </div>
+    <div class="card-content">
+      <h3>{{ tour.destination }}</h3>
+      <p>{{ tour.activities }}</p>
+      <span class="bottom-group">
+        <span>{{ tour.startDate }} - {{ tour.endDate }}</span>
+        <button mat-flat-button>Details</button>
+      </span>
+    </div>
+  </div>
+  } }
+</div>

@@ -1,0 +1,34 @@
+#tour-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  .tour-card {
+    width: 24rem;
+
+    border: 1px solid rgb(8, 113, 157);
+    border-radius: 1rem;
+    background-color: rgba(1, 102, 135, 0.458);
+    overflow: hidden;
+
+    .img-container {
+      display: flex;
+      justify-content: center;
+      height: 60%;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bottom-group {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 1rem;
+    }
+
+  }
+}

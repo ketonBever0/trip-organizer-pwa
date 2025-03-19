@@ -1,3 +1,40 @@
-<p>
-  navbar works!
-</p>
+<nav>
+  <span id="logo" style="margin-left: 10px"> logo </span>
+  <div id="links-center">
+    <a class="link" routerLink="">Home</a>
+    <a class="link" routerLink="tours">Tours</a>
+    <a class="link" routerLink="about">About</a>
+  </div>
+  <span style="margin-right: 10px">
+    <!-- <img
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+      alt=""
+      id="profile-pic"
+    /> -->
+    <div id="auth-links">
+      <a mat-stroked-button routerLink="signin">Sign In</a>
+      <a mat-flat-button class="signupButton" routerLink="signup">Sign Up</a>
+    </div>
+    <mat-icon id="drawer-toggle" (click)="toggleDrawer()">
+      {{ drawerOpen ? "close" : "menu" }}
+    </mat-icon>
+  </span>
+  <div id="backdrop"></div>
+  @if(drawerOpen) {
+  <div id="drawer">
+    <div id="drawer-header">
+      <span id="logo"> logo </span>
+      <!-- <mat-icon id="close-drawer">close</mat-icon> -->
+    </div>
+    <div id="drawer-links">
+      <a class="link" routerLink="">Home</a>
+      <a class="link" routerLink="tours">Tours</a>
+      <a class="link" routerLink="about">About</a>
+    </div>
+    <div id="drawer-auth-links">
+      <a mat-stroked-button routerLink="signin">Sign In</a>
+      <a mat-flat-button class="signup-button" routerLink="signup">Sign Up</a>
+    </div>
+  </div>
+  }
+</nav>

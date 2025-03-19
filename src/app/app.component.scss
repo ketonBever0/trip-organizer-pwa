@@ -1,18 +1,36 @@
-body {
-  background-color: #f8f9fa;
-  color: #495057;
+@use "../styles";
+
+#page-container {
+  // color: #495057;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
-  padding: 0;
   text-align: center;
+  // min-height: 100vh;
+  background: rgb(9, 8, 51);
+  // background: linear-gradient(
+  //   118deg,
+  //   rgba(9, 8, 51, 1) 0%,
+  //   rgba(5, 9, 151, 1) 68%,
+  //   rgba(0, 11, 255, 1) 100%
+  // );
+  background: linear-gradient(140deg, #048ea0, #047887, #64539a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding-top: 6rem;
   min-height: 100vh;
 }
 
 main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 1px solid #054e56;
+  min-width: 80%;
+  padding: 3rem 5rem;
+  border-radius: 1rem;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.4);
+  z-index: 5;
+  color: styles.$text-color-primary;
 }

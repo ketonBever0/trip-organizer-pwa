@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss'],
+  imports: [
+    MatButtonModule,
+    MatIcon,
+    RouterLink,
+  ],
 })
 export class NavbarComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
+  drawerOpen: boolean = false;
+  toggleDrawer() {
+    this.drawerOpen = !this.drawerOpen;
   }
 
+  ngOnInit() {}
 }

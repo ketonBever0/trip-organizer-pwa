@@ -1,0 +1,23 @@
+<h2>Join Now!</h2>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field>
+      <mat-label for="fullname">Full Name</mat-label>
+      <input matInput type="text" id="fullname" formControlName="fullname" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label for="email">E-mail address</mat-label>
+      <input matInput type="text" id="email" formControlName="email" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label for="mobile">Mobile Number</mat-label>
+      <input matInput type="text" id="mobile" formControlName="mobile" />
+    </mat-form-field>
+  </div>
+  <button mat-flat-button type="submit">Submit</button>
+</form>
