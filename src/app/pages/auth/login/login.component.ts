@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,7 +8,9 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
-import { AuthService } from '../../../core/auth/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [
@@ -27,7 +29,8 @@ export class LoginComponent {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -35,9 +38,15 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  private snackBar = inject(MatSnackBar);
+
+  async onSubmit() {
     if (this.loginForm.valid) {
-      this.authService.signIn(this.loginForm);
+      const error = await this.authService.signIn(this.loginForm);
+      if (error) this.snackBar.open(error, '', { duration: 3000 });
+      else {
+        this.router.navigateByUrl('/home');
+      }
     }
   }
 }

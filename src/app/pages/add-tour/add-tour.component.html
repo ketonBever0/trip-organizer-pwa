@@ -1,0 +1,45 @@
+<h2>Add Tour</h2>
+
+<form [formGroup]="addTourForm" (ngSubmit)="onSubmit()" (onreset)="onReset()">
+  <div>
+    <mat-form-field>
+      <mat-label for="destination">Destination</mat-label>
+      <input
+        matInput
+        type="text"
+        id="destination"
+        formControlName="destination"
+      />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label for="startDate">Start Date</mat-label>
+      <input matInput type="date" id="startDate" formControlName="startDate" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label for="endDate">End Date</mat-label>
+      <input matInput type="date" id="endDate" formControlName="endDate" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label for="price">Price</mat-label>
+      <input matInput type="number" id="price" formControlName="price" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label for="description">Description</mat-label>
+      <textarea
+        matInput
+        id="description"
+        formControlName="description"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <button mat-flat-button type="reset">Reset</button>
+  <button mat-flat-button type="submit">Submit</button>
+</form>

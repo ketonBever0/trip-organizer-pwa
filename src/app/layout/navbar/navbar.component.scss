@@ -23,18 +23,18 @@ nav {
   text-align: center;
   list-style-type: none;
   // gap: 40px;
-}
 
-.link {
-  display: block;
-  padding: 1rem 2rem;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s;
+  .link {
+    display: block;
+    padding: 1rem 2rem;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
 
-  &:hover {
-    background-color: #1f1e1e;
+    &:hover {
+      background-color: #1f1e1e;
+    }
   }
 }
 
@@ -45,8 +45,10 @@ nav {
 
 #profile-pic {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
 }
 
 mat-icon {
@@ -58,9 +60,46 @@ mat-icon {
   display: none;
 }
 
+#profile-menu {
+  position: fixed;
+  right: 0;
+  width: 16rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #333;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  z-index: 100;
+
+  #profile-menu-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+
+    .link {
+      padding: 0.5rem 6rem;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-radius: 0.5rem;
+
+      &:hover {
+        background-color: #1f1e1e;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   #links-center,
-  #auth-links {
+  #auth-links,
+  #profile-pic {
     display: none;
   }
 
@@ -120,5 +159,5 @@ mat-icon {
 }
 
 .signup-button {
-  color: styles.$text-color-primary
+  color: styles.$text-color-primary;
 }

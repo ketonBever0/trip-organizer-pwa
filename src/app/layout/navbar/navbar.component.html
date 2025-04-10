@@ -4,17 +4,36 @@
     <a class="link" routerLink="">Home</a>
     <a class="link" routerLink="tours">Tours</a>
     <a class="link" routerLink="about">About</a>
+    <!-- <span class="link" [matMenuTriggerFor]="menu"
+      >Manage Tours ˇ <mat-icon>close</mat-icon></span
+    >
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="tours/add">Add</a>
+      <a mat-menu-item routerLink="tours">List</a>
+    </mat-menu> -->
   </div>
   <span style="margin-right: 10px">
-    <!-- <img
-      src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
-      alt=""
+    @if(this.authService.isAuthenticated) {
+    <img
       id="profile-pic"
-    /> -->
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+      alt="profile picture"
+      (click)="toggleProfileMenu()"
+    />
+    <div id="profile-menu" *ngIf="profileMenuOpen">
+      <h3 id="profile-menu-header">Welcome {{authService.userData?.fullname}}!</h3>
+      <div id="profile-menu-links">
+        <a class="link" routerLink="profile">Profile</a>
+        <a class="link" (click)="logout()">Logout</a>
+      </div>
+
+    </div>
+    } @else {
     <div id="auth-links">
       <a mat-stroked-button routerLink="signin">Sign In</a>
       <a mat-flat-button class="signupButton" routerLink="signup">Sign Up</a>
     </div>
+    }
     <mat-icon id="drawer-toggle" (click)="toggleDrawer()">
       {{ drawerOpen ? "close" : "menu" }}
     </mat-icon>
@@ -27,7 +46,7 @@
       <!-- <mat-icon id="close-drawer">close</mat-icon> -->
     </div>
     <div id="drawer-links">
-      <a class="link" routerLink="">Home</a>
+      <a class="link" routerLink="home">Home</a>
       <a class="link" routerLink="tours">Tours</a>
       <a class="link" routerLink="about">About</a>
     </div>
