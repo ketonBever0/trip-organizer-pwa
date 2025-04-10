@@ -12,27 +12,31 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { env } from '../environment';
 import { provideServiceWorker } from '@angular/service-worker';
-import {DBConfig, provideIndexedDb} from 'ngx-indexed-db';
+import { DBConfig, provideIndexedDb } from 'ngx-indexed-db';
 
-const dbConfig: DBConfig  = {
+const dbConfig: DBConfig = {
   name: 'MyDb',
   version: 1,
-  objectStoresMeta: [{
-    store: 'tours',
-    storeConfig: { keyPath: 'id', autoIncrement: true },
-    storeSchema: [
-      { name: 'destination', keypath: 'destination', options: { unique: false } },
-    ]
-  }]
+  objectStoresMeta: [
+    {
+      store: 'tours',
+      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        {
+          name: 'destination',
+          keypath: 'destination',
+          options: { unique: false },
+        },
+      ],
+    },
+  ],
 };
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideFirebaseApp(() =>
-      initializeApp(env.firebaseConfig)
-    ),
+    provideFirebaseApp(() => initializeApp(env.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
