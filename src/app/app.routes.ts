@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { ToursComponent } from './pages/tours/tours.component';
 import { AddTourComponent } from './pages/add-tour/add-tour.component';
+import { authGuard } from './core/services/auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,7 +13,7 @@ export const routes: Routes = [
   { path: 'main', pathMatch: 'full', redirectTo: '' },
 
   { path: 'tours', component: ToursComponent },
-  { path: 'add-tour', component: AddTourComponent },
+  { path: 'add-tour', component: AddTourComponent, canActivate: [authGuard] },
 
   { path: 'signup', component: RegisterComponent },
   { path: 'signin', component: LoginComponent },
