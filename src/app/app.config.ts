@@ -10,7 +10,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
-import { env } from '../enviroment/enviroment';
+import { env } from '../enviroment';
 import { provideServiceWorker } from '@angular/service-worker';
 import {DBConfig, provideIndexedDb} from 'ngx-indexed-db';
 
