@@ -55,11 +55,11 @@ export class RegisterComponent {
     });
   }
 
-  private _snackBar = inject(MatSnackBar);
+  private snackBar = inject(MatSnackBar);
 
   async onSubmit() {
     if (!this.registerForm.valid) {
-      this._snackBar.open('You did not provide all required data.', '', {
+      this.snackBar.open('You did not provide all required data.', '', {
         duration: 3000,
       });
       return;
@@ -69,14 +69,14 @@ export class RegisterComponent {
       this.registerForm.value.password !=
       this.registerForm.value.confirmPassword
     ) {
-      this._snackBar.open('Password and Confirm Password must match.', '', {
+      this.snackBar.open('Password and Confirm Password must match.', '', {
         duration: 3000,
       });
       return;
     }
 
     const error = await this.authService.signUp(this.registerForm);
-    if (error) this._snackBar.open(error, '', { duration: 3000 });
+    if (error) this.snackBar.open(error, '', { duration: 3000 });
     else this.router.navigateByUrl('/signin');
   }
 }
