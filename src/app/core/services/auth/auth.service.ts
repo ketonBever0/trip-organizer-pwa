@@ -1,47 +1,44 @@
-import { inject, Injectable } from '@angular/core';
-import {
-  Auth,
-  createUserWithEmailAndPassword,
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-} from '@angular/fire/auth';
-import {
-  addDoc,
-  collection,
-  doc,
-  Firestore,
-  getDoc,
-  setDoc,
-} from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup } from '@angular/forms';
 import { FirebaseError } from 'firebase/app';
 import { UserType } from '../../models/user';
+import { StoreService } from '../store/store.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {
-    this.checkIsAuthenticated();
+  constructor(
+    public readonly fAuth: AngularFireAuth,
+    private readonly fStore: StoreService
+  ) {
+    this.fAuth.authState.subscribe(async (user) => {
+      if (user) {
+        this.fStore.db
+          .collection('users')
+          .doc(user.uid)
+          .get()
+          .subscribe((data) => data);
+        this.isAuthenticated = true;
+      } else {
+        this.isAuthenticated = false;
+      }
+    });
   }
 
   isAuthenticated = false;
   userData: UserType | null = null;
 
-  fAuth: Auth = inject(Auth);
-  fStore: Firestore = inject(Firestore);
-
   async signUp(form: FormGroup): Promise<string | null> {
     let error: string | null = null;
-    await createUserWithEmailAndPassword(
-      this.fAuth,
-      form.value.email,
-      form.value.password
-    )
+    await this.fAuth
+      .createUserWithEmailAndPassword(form.value.email, form.value.password)
       .then((creds) => {
+        console.log(creds);
         if (creds)
-          setDoc(doc(this.fStore, 'users', creds.user.uid), {
+          this.fStore.db.collection('users').doc(creds.user!.uid).set({
             // id: creds.user?.uid,
             email: creds.user?.email,
             fullname: form.value.fullname,
@@ -59,18 +56,16 @@ export class AuthService {
 
   async signIn(form: FormGroup): Promise<string | null> {
     let error: string | null = null;
-    await signInWithEmailAndPassword(
-      this.fAuth,
-      form.value.email,
-      form.value.password
-    ).catch((e: FirebaseError) => {
-      console.log(e.message);
-      if (e.message.includes('auth/invalid-credential')) {
-        error = 'Wrong credentials!';
-      } else if (e.message.includes('auth/too-many-requests)')) {
-        error = 'Too many requests. Please try again later.';
-      }
-    });
+    await this.fAuth
+      .signInWithEmailAndPassword(form.value.email, form.value.password)
+      .catch((e: FirebaseError) => {
+        console.log(e.message);
+        if (e.message.includes('auth/invalid-credential')) {
+          error = 'Wrong credentials!';
+        } else if (e.message.includes('auth/too-many-requests)')) {
+          error = 'Too many requests. Please try again later.';
+        }
+      });
 
     if (error) return error;
     else return null;
@@ -78,17 +73,5 @@ export class AuthService {
 
   async signOut() {
     await this.fAuth.signOut();
-  }
-
-  async checkIsAuthenticated() {
-    onAuthStateChanged(this.fAuth, async (user) => {
-      if (user) {
-        const userDoc = await getDoc(doc(this.fStore, 'users', user.uid));
-        this.userData = userDoc.data() as UserType;
-        this.isAuthenticated = true;
-      } else {
-        this.isAuthenticated = false;
-      }
-    });
   }
 }
