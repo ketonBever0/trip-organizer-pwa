@@ -4,7 +4,6 @@ nav {
   background: rgba(0, 0, 0, 0.7);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: white;
-  // padding: 10px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,14 +25,14 @@ nav {
 
   .link {
     display: block;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     color: white;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s;
 
     &:hover {
-      background-color: #1f1e1e;
+      background-color: #424b90;
     }
   }
 }
@@ -47,7 +46,7 @@ nav {
   border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
-  margin: 0.5rem;
+  margin-right: 0.7rem;
   cursor: pointer;
 }
 
@@ -63,7 +62,7 @@ mat-icon {
 #profile-menu {
   position: fixed;
   right: 0;
-  width: 16rem;
+  min-width: 16rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,6 +91,11 @@ mat-icon {
       &:hover {
         background-color: #1f1e1e;
       }
+    }
+
+    .openable {
+      height: 3rem;
+      cursor: pointer;
     }
   }
 }
@@ -142,9 +146,22 @@ mat-icon {
     align-items: center;
   }
 
-  #drawer-links {
+  #drawer-main-links {
     display: flex;
     flex-direction: column;
+
+    .link {
+      display: block;
+      padding: 1rem 6rem;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #424b90;
+      }
+    }
   }
 
   .link {
@@ -155,6 +172,15 @@ mat-icon {
     display: flex;
     gap: 10px;
     margin: 0 1rem;
+
+    // #drawer-auth-exp {
+
+    // }
+
+    #drawer-profile-pic {
+      height: 2rem;
+      border-radius: 4rem;
+    }
   }
 }
 

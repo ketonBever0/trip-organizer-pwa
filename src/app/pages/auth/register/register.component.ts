@@ -76,7 +76,12 @@ export class RegisterComponent {
     }
 
     const error = await this.authService.signUp(this.registerForm);
-    if (error) this.snackBar.open(error, '', { duration: 3000 });
-    else this.router.navigateByUrl('/signin');
+    if (error) {
+      if (String(error).includes('auth/email-already-in-use'))
+        this.snackBar.open("E-mail already exists!", '', { duration: 3000 });
+    } else {
+      this.snackBar.open("Successfully registered. Now log in.", '', { duration: 3000 });
+      this.router.navigateByUrl('/signin');
+    }
   }
 }

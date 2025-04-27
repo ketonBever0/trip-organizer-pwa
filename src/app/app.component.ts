@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, isDevMode, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { interval } from 'rxjs';
@@ -27,22 +27,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.swUpdate.activateUpdate();
-    interval(3000).subscribe(() => {
-      this.swUpdate.checkForUpdate().then((update) => {
-        if (update) {
-          alert('New version available!');
-          window.location.reload();
-        }
-      });
+    if (!isDevMode()) {
+      interval(3000).subscribe(() => {
+        this.swUpdate.checkForUpdate().then((update) => {
+          if (update) {
+            alert('New version available!');
+            window.location.reload();
+          }
+        });
 
-      this.offlineCb = () => {
-        this.snackBar.open('You are offline!', 'Ok', { duration: 10000 });
-      };
-      this.onlineCb = () => {
-        this.snackBar.open('You are online!', '', { duration: 3000 });
-      };
-      window.addEventListener('offline', this.offlineCb);
-      window.addEventListener('online', this.onlineCb);
-    });
+        this.offlineCb = () => {
+          this.snackBar.open('You are offline!', 'Ok', { duration: 10000 });
+        };
+        this.onlineCb = () => {
+          this.snackBar.open('You are online!', '', { duration: 3000 });
+        };
+        window.addEventListener('offline', this.offlineCb);
+        window.addEventListener('online', this.onlineCb);
+      });
+    }
   }
 }

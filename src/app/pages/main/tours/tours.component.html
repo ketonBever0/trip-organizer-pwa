@@ -1,8 +1,10 @@
 <h2>Upcoming Tours!</h2>
 
-@if (authService.isAuthenticated && authService.userData?.role == 'admin') {
+@if (authService.isAuthenticated && authService.userData!.role == 'admin') {
 <div class="admin-actions">
-  <button mat-flat-button (click)="fillWithTemplateData()">Fill with some Template Data</button>
+  <button mat-flat-button (click)="fillWithTemplateData()">
+    Fill with some Template Data
+  </button>
   <button mat-flat-button routerLink="/add-tour">Add Tour</button>
   <button mat-flat-button (click)="deleteAll()">Delete all</button>
 </div>
@@ -21,9 +23,15 @@
       <p>{{ tour.activities }}</p>
       <span class="bottom-group">
         <span>{{ tour.startDate }} - {{ tour.endDate }}</span>
-        <button mat-flat-button>Details</button>
+        <button mat-flat-button (click)="openModal()">Details</button>
       </span>
     </div>
   </div>
   } }
 </div>
+
+@if(tourModalOpened) {
+<div id="modal-container" (click)="closeModal()">
+  <div click-stop-propagation click id="tour-modal"></div>
+</div>
+}

@@ -1,0 +1,18 @@
+<h2>Create Your Organizational unit!</h2>
+
+<form [formGroup]="this.form" (ngSubmit)="onSubmit()">
+
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="name">Organization Name</mat-label>
+      <input
+        matInput
+        type="text"
+        id="name"
+        formControlName="name"
+      />
+    </mat-form-field>
+  </div>
+
+</form>
+

@@ -48,5 +48,15 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideDatabase(() => getDatabase()),
+    provideFirebaseApp(() =>
+      initializeApp({
+        projectId: 'tourism-d7f90',
+        appId: '1:1083320592689:web:df461fd4b02bba9ab96810',
+        storageBucket: 'tourism-d7f90.firebasestorage.app',
+        apiKey: 'AIzaSyCxaPfiywfMojF8gBf5_mTUIxdRyrQwZSs',
+        authDomain: 'tourism-d7f90.firebaseapp.com',
+        messagingSenderId: '1083320592689',
+      })
+    ),
   ],
 };

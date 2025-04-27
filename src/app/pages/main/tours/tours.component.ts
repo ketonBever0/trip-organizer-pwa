@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../../core/services/auth/auth.service';
+import { AuthService } from '@app/core/services/auth/auth.service';
 import { RouterLink } from '@angular/router';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
-import { TourType } from '../../core/models/tour';
+import { TourType } from '@app/core/models/tour';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { ClickStopPropagationDirective } from '@app/core/directives/click-stop-propagation.directive';
 
 @Component({
-  imports: [MatCardModule, MatButtonModule, RouterLink],
+  imports: [
+    ClickStopPropagationDirective,
+    MatCardModule,
+    MatButtonModule,
+    RouterLink,
+    MatBottomSheetModule,
+  ],
   selector: 'app-tours',
   templateUrl: './tours.component.html',
   styleUrls: ['./tours.component.scss'],
@@ -21,18 +29,14 @@ export class ToursComponent implements OnInit {
   tours: TourType[] = [];
 
   ngOnInit() {
-
     this.fetchTours();
-
   }
 
   fetchTours() {
-    this.idbService
-      .getAll('tours')
-      .subscribe((tours) => {
-        // console.log('tours: ', tours);
-        this.tours = tours as TourType[];
-      });
+    this.idbService.getAll('tours').subscribe((tours) => {
+      // console.log('tours: ', tours);
+      this.tours = tours as TourType[];
+    });
   }
 
   deleteTour(id: string) {
@@ -107,4 +111,13 @@ export class ToursComponent implements OnInit {
     this.fetchTours();
   }
 
+  tourModalOpened = false;
+
+  openModal() {
+    this.tourModalOpened = true;
+  }
+
+  closeModal() {
+    this.tourModalOpened = false;
+  }
 }
