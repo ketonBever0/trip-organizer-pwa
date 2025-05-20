@@ -1,0 +1,40 @@
+<div id="container">
+  <h2>Our Organiztational units</h2>
+  <div id="head-actions">
+    @if(this.fAuth.isAuthenticated) {
+    <a routerLink="create" mat-flat-button>Create</a>
+    }
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Public">
+      <div class="list">
+        @for (o of os.orgUnits; track $index) { @if(!o.isPrivate) {
+        <mat-card>
+          <mat-card-header>{{ o.name }}</mat-card-header>
+        </mat-card>
+        } }
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Where I am member">
+      <div class="list">
+        @for (o of os.myOrgUnits; track $index) { @if(o.members.includes(fAuth.userData()!.id)) {
+        <mat-card>
+          <mat-card-header>{{ o.name }}</mat-card-header>
+        </mat-card>
+        } }
+      </div>
+    </mat-tab>
+
+    <mat-tab label="My Units">
+      <div class="list">
+        @for (o of os.myOrgUnits; track $index) { @if( o.members && o.members[0]
+        == fAuth.userData()!.id) {
+        <mat-card>
+          <mat-card-header>{{ o.name }}</mat-card-header>
+        </mat-card>
+        } }
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

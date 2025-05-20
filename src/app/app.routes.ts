@@ -20,13 +20,11 @@ export const routes: Routes = [
   { path: 'signin', component: LoginComponent },
 
   {
-    path: 'organization',
-    children: [
-      {
-        path: 'create',
-        component: CreateUnitComponent,
-      },
-    ],
+    path: 'organizations',
+    loadChildren: () =>
+      import('./pages/organization/organizations.module').then(
+        (m) => m.OrganizationsModule
+      ),
   },
 
   {

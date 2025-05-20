@@ -28,16 +28,11 @@
     />
     <div id="profile-menu" *ngIf="profileMenuOpen">
       <h3 id="profile-menu-header">
-        Welcome {{ authService.userData?.fullname }}!
+        Welcome {{ authService.userData()!.fullname }}!
       </h3>
       <div id="profile-menu-links">
         <a class="link" routerLink="profile">Profile</a>
-        <details class="link openable">
-          <summary>Organizations</summary>
-          <div>
-            <a class="link" routerLink="organization/create">Create</a>
-          </div>
-        </details>
+        <a class="link" routerLink="organizations">Organizations</a>
         <a class="link" (click)="logout()">Logout</a>
       </div>
     </div>
@@ -77,7 +72,7 @@
             />
           </mat-panel-title>
           <mat-panel-description>
-            {{ this.authService.userData?.fullname }}
+            {{ this.authService.userData()!.fullname }}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <p>asdw</p>

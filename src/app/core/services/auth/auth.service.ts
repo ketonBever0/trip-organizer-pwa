@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FirebaseError } from 'firebase/app';
 import { UserType } from '../../models/user';
@@ -17,6 +17,8 @@ import { doc, getDoc, setDoc } from '@angular/fire/firestore';
   providedIn: 'root',
 })
 export class AuthService {
+  userData = signal<UserType | null>(null);
+
   constructor(
     public readonly fAuth: Auth,
     private readonly fStore: StoreService
@@ -25,9 +27,10 @@ export class AuthService {
 
     authState(fAuth).subscribe(async (user) => {
       if (user) {
-        this.userData = (
-          await getDoc(doc(fStore.db, 'users', user.uid))
-        ).data() as UserType;
+        this.userData.set({
+          ...(await getDoc(doc(fStore.db, 'users', user.uid))).data(),
+          id: user.uid,
+        } as UserType);
         this.isAuthenticated = true;
       } else {
         this.isAuthenticated = false;
@@ -39,8 +42,6 @@ export class AuthService {
 
   // userDataSuspect = new BehaviorSubject<UserType | null>(null);
   // userData = this.userDataSuspect.asObservable();
-
-  userData: UserType | null = null;
 
   async signUp(form: FormGroup): Promise<string | null> {
     let error: string | null = null;
