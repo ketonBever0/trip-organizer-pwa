@@ -1,3 +1,72 @@
-:host {
-  display: block;
+@use "@src/styles.scss";
+
+.org-unit-container {
+  padding: 20px;
+
+  .org-unit-card {
+    min-width: 26rem;
+    width: 100%;
+    border-radius: 8px;
+
+    mat-card-header {
+      padding: 16px;
+      @include styles.flex-layout;
+
+      mat-card-title {
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      mat-card-subtitle {
+        margin-top: 0.5rem;
+        font-size: 16px;
+      }
+    }
+
+    mat-card-content {
+      padding: 16px;
+
+      .description {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 16px;
+      }
+
+      mat-checkbox {
+        margin: 16px 0;
+        color: #1976d2;
+
+        ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+          background-color: #1976d2;
+        }
+      }
+
+      h3 {
+        font-size: 18px;
+        font-weight: 500;
+        margin: 16px 0 8px;
+      }
+    }
+  }
+
+  #tour-list {
+    margin-top: 2rem;
+    @include styles.flex-layout;
+    mat-card {
+      mat-card-header {
+        @include styles.flex-layout;
+      }
+    }
+  }
+
+}
+
+@media (max-width: 600px) {
+  .org-unit-container {
+    padding: 10px;
+
+    .org-unit-card {
+      max-width: 100%;
+    }
+  }
 }

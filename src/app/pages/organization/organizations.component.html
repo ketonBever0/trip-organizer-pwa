@@ -11,6 +11,7 @@
         @for (o of os.orgUnits; track $index) { @if(!o.isPrivate) {
         <mat-card>
           <mat-card-header>{{ o.name }}</mat-card-header>
+          <mat-card-content>{{ o.description }}</mat-card-content>
         </mat-card>
         } }
       </div>
@@ -18,9 +19,16 @@
 
     <mat-tab label="Where I am member">
       <div class="list">
-        @for (o of os.myOrgUnits; track $index) { @if(o.members.includes(fAuth.userData()!.id)) {
+        @for (o of os.myOrgUnits; track $index) {
+        @if(o.members.includes(fAuth.userData()!.id)) {
         <mat-card>
           <mat-card-header>{{ o.name }}</mat-card-header>
+          <mat-card-content>{{ o.description }}</mat-card-content>
+          <mat-card-actions>
+            <a mat-flat-button [routerLink]="'/organization/unit/' + o.id"
+              >Open</a
+            >
+          </mat-card-actions>
         </mat-card>
         } }
       </div>
@@ -32,6 +40,12 @@
         == fAuth.userData()!.id) {
         <mat-card>
           <mat-card-header>{{ o.name }}</mat-card-header>
+          <mat-card-content>{{ o.description }}</mat-card-content>
+          <mat-card-actions>
+            <a mat-flat-button [routerLink]="'/organizations/unit/' + o.id"
+              >Open</a
+            >
+          </mat-card-actions>
         </mat-card>
         } }
       </div>

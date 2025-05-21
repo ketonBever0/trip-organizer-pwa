@@ -1,11 +1,16 @@
+import { Timestamp } from '@angular/fire/firestore';
+import { TourChat } from './tour-chat';
+
 export type TourType = {
   id: string;
   destination: string;
-  startDate: string;
-  endDate: string;
+  startDate: Timestamp;
+  endDate: Timestamp;
   budget: number;
   activities: string[];
   transportation: string;
-  numberOfMembers: number;
+  applied: string[];
   limit: number;
-}
+  orgId: string;
+  chat: TourChat[];
+};

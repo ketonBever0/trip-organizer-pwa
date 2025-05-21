@@ -1,1 +1,40 @@
-<p>my-unit works!</p>,
+<div class="org-unit-container">
+  <mat-card class="org-unit-card" *ngIf="orgUnit">
+    @if(orgUnit.members[0] == fAuth.userData()?.id) {
+    <button (click)="deleteOrgUnit()" mat-flat-button>Delete</button>
+    }
+    <mat-card-header>
+      <mat-card-title>{{ orgUnit.name }}</mat-card-title>
+      <mat-card-subtitle>{{ orgUnit.type }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="description">{{ orgUnit.description }}</p>
+      <form [formGroup]="form">
+        <mat-checkbox formControlName="isPrivate">
+          {{ orgUnit.isPrivate ? "Privát" : "Nyilvános" }}
+        </mat-checkbox>
+      </form>
+      <h3>Members: {{ orgUnit.members.length }}</h3>
+    </mat-card-content>
+  </mat-card>
+
+  <h2>Tours</h2>
+
+  <div id="tour-list">
+    @if (tours.length > 0) { @for (t of tours; track $index) {
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ t.destination }}</mat-card-title>
+        <mat-card-subtitle>Applied: {{ t.applied.length }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <ul>
+          @for (a of t.activities; track $index) {
+          <li>{{ a }}</li>
+          }
+        </ul>
+      </mat-card-content>
+    </mat-card>
+    } }
+  </div>
+</div>

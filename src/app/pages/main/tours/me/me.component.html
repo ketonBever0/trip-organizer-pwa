@@ -1,0 +1,23 @@
+<h2>Applied Tours</h2>
+
+<div id="tour-container">
+  @if(tours.length > 0) { @for (tour of tours; track $index) {
+  <div class="tour-card">
+    <div class="img-container">
+      <img src="https://placehold.co/600x400" alt="" />
+    </div>
+    <div class="card-content">
+      <h3>{{ tour.destination }}</h3>
+      <p>{{ tour.activities }}</p>
+      <div>Applied: {{ tour.applied.length }}</div>
+      <span class="bottom-group">
+        <span
+          >{{ tour.startDate.toDate() | date : "yyyy. MM. dd." }} -
+          {{ tour.endDate.toDate() | date : "yyyy. MM. dd." }}</span
+        >
+        <a mat-flat-button [routerLink]="['/tours/one/' + tour.id]"> View </a>
+      </span>
+    </div>
+  </div>
+  } }
+</div>

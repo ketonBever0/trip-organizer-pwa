@@ -1,6 +1,6 @@
 <h2>Upcoming Tours!</h2>
 
-@if (authService.isAuthenticated && authService.userData!.role == 'admin') {
+<!-- @if (authService.isAuthenticated && authService.userData()?.role) {
 <div class="admin-actions">
   <button mat-flat-button (click)="fillWithTemplateData()">
     Fill with some Template Data
@@ -8,26 +8,35 @@
   <button mat-flat-button routerLink="/add-tour">Add Tour</button>
   <button mat-flat-button (click)="deleteAll()">Delete all</button>
 </div>
-}
+} -->
 <div id="tour-container">
   @if(tours.length > 0) { @for (tour of tours; track $index) {
+  @if(!fAuth.isAuthenticated || !tour.applied.includes(fAuth.userData()!.id)) {
   <div class="tour-card">
-    <div>
+    <!-- <div>
       <button mat-flat-button (click)="deleteTour(tour.id)">Delete</button>
-    </div>
+    </div> -->
     <div class="img-container">
       <img src="https://placehold.co/600x400" alt="" />
     </div>
     <div class="card-content">
       <h3>{{ tour.destination }}</h3>
       <p>{{ tour.activities }}</p>
+      <div>Applied: {{ tour.applied.length }}</div>
       <span class="bottom-group">
-        <span>{{ tour.startDate }} - {{ tour.endDate }}</span>
-        <button mat-flat-button (click)="openModal()">Details</button>
+        <span
+          >{{ tour.startDate.toDate() | date : "yyyy. MM. dd." }} -
+          {{ tour.endDate.toDate() | date : "yyyy. MM. dd." }}</span
+        >
+        @if(fAuth.isAuthenticated) {
+        <button mat-flat-button (click)="applyTour(tour)">
+          {{ tour.budget }} HUF
+        </button>
+        }
       </span>
     </div>
   </div>
-  } }
+  } } }
 </div>
 
 @if(tourModalOpened) {

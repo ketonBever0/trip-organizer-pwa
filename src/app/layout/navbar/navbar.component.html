@@ -26,13 +26,14 @@
       alt="profile picture"
       (click)="toggleProfileMenu()"
     />
-    <div id="profile-menu" *ngIf="profileMenuOpen">
+    <div id="profile-menu" *ngIf="profileMenuOpen" (click)="toggleProfileMenu()">
       <h3 id="profile-menu-header">
         Welcome {{ authService.userData()!.fullname }}!
       </h3>
       <div id="profile-menu-links">
         <a class="link" routerLink="profile">Profile</a>
         <a class="link" routerLink="organizations">Organizations</a>
+        <a class="link" routerLink="tours/me">My Tours</a>
         <a class="link" (click)="logout()">Logout</a>
       </div>
     </div>

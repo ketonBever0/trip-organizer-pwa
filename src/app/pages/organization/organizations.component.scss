@@ -1,13 +1,17 @@
+@use "@src/styles.scss";
+
 #container {
   #head-actions {
     display: flex;
     justify-content: space-between;
   }
-
 }
 
 .list {
-  display: flex;
-  
-  min-height: 6rem;
+  @include styles.flex-layout;
+
+  mat-card {
+    min-height: 14rem;
+    min-width: 12rem;
+  }
 }

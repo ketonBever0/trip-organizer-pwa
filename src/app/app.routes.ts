@@ -13,7 +13,11 @@ export const routes: Routes = [
   { path: 'home', pathMatch: 'full', redirectTo: '' },
   { path: 'main', pathMatch: 'full', redirectTo: '' },
 
-  { path: 'tours', component: ToursComponent },
+  {
+    path: 'tours',
+    loadChildren: () =>
+      import('./pages/main/tours/tours.module').then((m) => m.ToursModule),
+  },
   { path: 'add-tour', component: AddTourComponent, canActivate: [authGuard] },
 
   { path: 'signup', component: RegisterComponent },

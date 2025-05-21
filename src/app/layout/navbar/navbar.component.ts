@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit {
     this.profileMenuOpen = !this.profileMenuOpen;
   }
 
+
   logout() {
     this.profileMenuOpen = false;
     this.authService.signOut();

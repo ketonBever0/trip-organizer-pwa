@@ -4,10 +4,13 @@ import { AuthService } from '../auth/auth.service';
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   FirestoreError,
   getDoc,
   getDocs,
   query,
+  updateDoc,
   where,
 } from '@angular/fire/firestore';
 import { OrgUnitType } from '@app/core/models/organization';
@@ -59,6 +62,15 @@ export class OrganizationService {
     });
   }
 
+  async getOneOrganization(id: string) {
+    return getDoc(doc(this.fStore.db, 'organizations', id)).then((res) => {
+      return {
+        ...res.data(),
+        id: id,
+      } as OrgUnitType;
+    });
+  }
+
   async addOrganization(form: FormGroup) {
     return await addDoc(collection(this.fStore.db, 'organizations'), {
       ...form.value,
@@ -69,5 +81,15 @@ export class OrganizationService {
         console.error(e.code);
         return 'Error!';
       });
+  }
+
+  async updateVisibility(id: string, value: boolean) {
+    await updateDoc(doc(this.fStore.db, 'organizations', id), {
+      isPrivate: value,
+    });
+  }
+
+  async deleteOrgUnit(id: string) {
+    await deleteDoc(doc(this.fStore.db, 'organizations', id));
   }
 }

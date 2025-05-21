@@ -1,3 +1,5 @@
+import { TourChat } from "./tour-chat";
+
 export type OrgUnitType = {
   id: string;
   name: string;
