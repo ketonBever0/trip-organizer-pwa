@@ -12,11 +12,15 @@
       >
         @if(message.senderId != fAuth.userData()!.id) {
         <sub>{{ message.senderName }}:</sub> }
-        <p [matTooltip]="message.when.toDate() | date">{{ message.text }}</p>
+        <p
+          [matTooltip]="message.when.toDate() | date : 'yyyy. MM. dd. hh:mm:ss'"
+        >
+          {{ message.text }}
+        </p>
       </span>
     </mat-list-item>
     } @empty {
-    <div>No message</div>
+    <div>No messages yet</div>
     }
   </mat-list>
   <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">

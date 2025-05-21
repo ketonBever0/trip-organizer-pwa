@@ -55,7 +55,7 @@ export class TourPageComponent implements OnInit, OnDestroy {
   id: string | null = null;
 
   private readonly destroy$ = new Subject<void>();
-  private paramMapSub?: Subscription;
+  // private paramMapSub?: Subscription;
 
   tour$: Observable<TourType | null> | undefined;
 

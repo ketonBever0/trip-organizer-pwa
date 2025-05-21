@@ -5,6 +5,7 @@ import { TourType } from '@app/core/models/tour';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   docData,
   getDoc,
@@ -15,6 +16,7 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +28,37 @@ export class TourService {
     private readonly fStore: StoreService,
     private readonly fAuth: AuthService
   ) {}
+
+  async createTour(id: string, form: FormGroup, activities: string[]) {
+    await addDoc(collection(this.fStore.db, 'tours'), {
+      orgId: id,
+      chat: [],
+      applied: [],
+      destination: form.get('destination')?.value,
+      startDate: Timestamp.fromDate(form.get('startDate')?.value as Date),
+      endDate: Timestamp.fromDate(form.get('endDate')?.value as Date),
+      budget: form.get('budget')?.value,
+      limit: form.get('limit')?.value,
+      transportation: form.get('transportation')?.value,
+      activities: activities,
+    });
+  }
+
+  async updateTour(id: string, form: FormGroup, activities: string[]) {
+    await updateDoc(doc(this.fStore.db, 'tours', id), {
+      destination: form.get('destination')?.value,
+      startDate: Timestamp.fromDate(form.get('startDate')?.value as Date),
+      endDate: Timestamp.fromDate(form.get('endDate')?.value as Date),
+      budget: form.get('budget')?.value,
+      limit: form.get('limit')?.value,
+      transportation: form.get('transportation')?.value,
+      activities: activities,
+    });
+  }
+
+  async deleteTour(id: string) {
+    await deleteDoc(doc(this.fStore.db, 'tours', id));
+  }
 
   getOneTour(id: string): Observable<TourType> {
     // return await getDoc(doc(this.fStore.db, 'tours', id)).then((res) => {

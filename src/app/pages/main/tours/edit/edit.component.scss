@@ -1,0 +1,12 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  #bottom-actions {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 2rem;
+  }
+}

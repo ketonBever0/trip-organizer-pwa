@@ -7,6 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTreeModule } from '@angular/material/tree';
 import { NgIf } from '@angular/common';
+import { ClickStopPropagationDirective } from '@app/core/directives/click-stop-propagation.directive';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,7 @@ import { NgIf } from '@angular/common';
     MatExpansionModule,
     MatTreeModule,
     NgIf,
+    ClickStopPropagationDirective
   ],
 })
 export class NavbarComponent implements OnInit {

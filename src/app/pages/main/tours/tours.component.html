@@ -22,7 +22,7 @@
     <div class="card-content">
       <h3>{{ tour.destination }}</h3>
       <p>{{ tour.activities }}</p>
-      <div>Applied: {{ tour.applied.length }}</div>
+      <div>{{ tour.applied.length | appliedFor }}</div>
       <span class="bottom-group">
         <span
           >{{ tour.startDate.toDate() | date : "yyyy. MM. dd." }} -

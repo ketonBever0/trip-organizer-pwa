@@ -52,6 +52,7 @@
   #tour-list {
     margin-top: 2rem;
     @include styles.flex-layout;
+    flex-wrap: wrap;
     mat-card {
       mat-card-header {
         @include styles.flex-layout;
@@ -59,6 +60,10 @@
     }
   }
 
+}
+
+.card-actions {
+  @include styles.flex-layout;
 }
 
 @media (max-width: 600px) {

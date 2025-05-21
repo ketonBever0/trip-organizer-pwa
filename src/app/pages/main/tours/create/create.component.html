@@ -1,0 +1,101 @@
+<h2>Add Tour</h2>
+
+<form (submit)="onSubmit()" [formGroup]="createTourForm">
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="destination">Destination</mat-label>
+      <input
+        matInput
+        type="text"
+        id="destination"
+        formControlName="destination"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input
+        matInput
+        formControlName="startDate"
+        [matDatepicker]="startPicker"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="startPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input matInput formControlName="endDate" [matDatepicker]="endPicker" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="endPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="budget">Budget</mat-label>
+      <input matInput type="number" id="budget" formControlName="budget" />
+    </mat-form-field>
+  </div>
+
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="transportation">Transport</mat-label>
+      <input
+        matInput
+        type="text"
+        id="transportation"
+        formControlName="transportation"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="limit">Limit</mat-label>
+      <input matInput type="number" id="limit" formControlName="limit" />
+    </mat-form-field>
+  </div>
+
+  <h3>Activities</h3>
+
+  <mat-form-field class="activity-chip-list" matTooltip="Type something, then press ENTER or , (COMMA). You can edit by double clicking one of these.">
+    <mat-label>Tour Activities</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Enter Activities">
+      @for (a of activities(); track a) {
+      <mat-chip-row
+        (removed)="removeActivity(a)"
+        [editable]="true"
+        (edited)="editActivity(a, $event)"
+        [aria-description]="'press enter to edit ' + a"
+      >
+        {{ a }}
+        <button matChipRemove [attr.aria-label]="'remove ' + a">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+      }
+      <input
+        placeholder="New activity..."
+        [matChipInputFor]="chipGrid"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="addActivity($event)"
+      />
+    </mat-chip-grid>
+  </mat-form-field>
+
+  <button mat-flat-button type="submit">Create</button>
+</form>

@@ -1,7 +1,7 @@
 <div class="org-unit-container">
   <mat-card class="org-unit-card" *ngIf="orgUnit">
     @if(orgUnit.members[0] == fAuth.userData()?.id) {
-    <button (click)="deleteOrgUnit()" mat-flat-button>Delete</button>
+    <button (click)="deleteOrgUnit()" mat-raised-button>Delete</button>
     }
     <mat-card-header>
       <mat-card-title>{{ orgUnit.name }}</mat-card-title>
@@ -19,13 +19,18 @@
   </mat-card>
 
   <h2>Tours</h2>
+  @if(orgUnit?.id) {
+  <a mat-flat-button [routerLink]="['/tours/create', orgUnit?.id]">Add Tour</a>
+  }
 
   <div id="tour-list">
     @if (tours.length > 0) { @for (t of tours; track $index) {
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{ t.destination }}</mat-card-title>
-        <mat-card-subtitle>Applied: {{ t.applied.length }}</mat-card-subtitle>
+        <mat-card-subtitle>{{
+          t.applied.length | appliedFor
+        }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <ul>
@@ -34,6 +39,10 @@
           }
         </ul>
       </mat-card-content>
+      <mat-card-actions class="card-actions">
+        <a mat-stroked-button [routerLink]="['/tours/edit', t.id]">Edit</a>
+        <button mat-raised-button (click)="deleteTour(t.id)">Delete</button>
+      </mat-card-actions>
     </mat-card>
     } }
   </div>

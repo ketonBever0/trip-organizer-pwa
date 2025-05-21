@@ -9,6 +9,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { ClickStopPropagationDirective } from '@app/core/directives/click-stop-propagation.directive';
 import { TourService } from '@app/core/services/tour/tour.service';
 import { DatePipe } from '@angular/common';
+import { AppliedForPipe } from '@app/core/pipes/applied-for.pipe';
 
 @Component({
   imports: [
@@ -17,6 +18,7 @@ import { DatePipe } from '@angular/common';
     MatButtonModule,
     MatBottomSheetModule,
     DatePipe,
+    AppliedForPipe
   ],
   selector: 'app-tours',
   templateUrl: './tours.component.html',

@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
@@ -17,6 +17,7 @@ import { TourService } from '@app/core/services/tour/tour.service';
 import { Subscription } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { AppliedForPipe } from '@app/core/pipes/applied-for.pipe';
 
 @Component({
   selector: 'app-org-unit',
@@ -30,6 +31,8 @@ import { AuthService } from '@app/core/services/auth/auth.service';
     MatCardModule,
     MatListModule,
     MatButtonModule,
+    RouterLink,
+    AppliedForPipe,
   ],
   changeDetection: ChangeDetectionStrategy.Default,
 })
@@ -82,6 +85,11 @@ export class MyUnitComponent implements OnInit, OnDestroy {
   async deleteOrgUnit() {
     await this.os.deleteOrgUnit(this.orgUnit!.id);
     this.router.navigateByUrl('/organizations');
+  }
+
+  async deleteTour(id: string) {
+    await this.ts.deleteTour(id);
+    this.tours = await this.ts.getToursFromOrg(this.orgUnit!.id);
   }
 
   ngOnDestroy() {

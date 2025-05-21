@@ -26,7 +26,11 @@
       alt="profile picture"
       (click)="toggleProfileMenu()"
     />
-    <div id="profile-menu" *ngIf="profileMenuOpen" (click)="toggleProfileMenu()">
+    <div
+      id="profile-menu"
+      *ngIf="profileMenuOpen"
+      (click)="toggleProfileMenu()"
+    >
       <h3 id="profile-menu-header">
         Welcome {{ authService.userData()!.fullname }}!
       </h3>
@@ -49,9 +53,9 @@
   </span>
 
   <!-- MOBILE DRAWER -->
-  <div id="backdrop"></div>
+  <div id="backdrop" (click)="toggleDrawer()"></div>
   @if(drawerOpen) {
-  <div id="drawer">
+  <div id="drawer" (click)="toggleDrawer()" [class.open-drawer]="drawerOpen">
     <div id="drawer-header">
       <span id="logo"> logo </span>
       <!-- <mat-icon id="close-drawer">close</mat-icon> -->
@@ -64,7 +68,7 @@
     <div id="drawer-auth-links">
       @if(this.authService.isAuthenticated) {
       <mat-expansion-panel hideToggle class="drawer-auth-exp">
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header click-stop-propagation>
           <mat-panel-title>
             <img
               id="drawer-profile-pic"
@@ -76,7 +80,14 @@
             {{ this.authService.userData()!.fullname }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p>asdw</p>
+        <div class="profile-menu-actions">
+          <a class="profile-menu-btn" routerLink="profile">Profile</a>
+          <a class="profile-menu-btn" routerLink="organizations"
+            >Organizations</a
+          >
+          <a class="profile-menu-btn" routerLink="tours/me">My Tours</a>
+          <div class="profile-menu-btn" (click)="authService.signOut()">Logout</div>
+        </div>
       </mat-expansion-panel>
       } @else {
       <a mat-stroked-button routerLink="signin">Sign In</a>

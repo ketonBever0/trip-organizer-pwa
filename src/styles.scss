@@ -1,15 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 $text-color-primary: rgb(210, 255, 250);
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+$menu-hover-bg: #424b90;
 $margin-from-top: 3rem;
 
 @mixin flex-layout {
@@ -17,4 +36,11 @@ $margin-from-top: 3rem;
   justify-content: space-around;
   align-items: center;
   gap: 2rem;
+}
+
+@mixin menu-link-btn {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
 }

@@ -11,7 +11,17 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { doc, getDoc, setDoc } from '@angular/fire/firestore';
+import {
+  clearIndexedDbPersistence,
+  doc,
+  getDoc,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+  setDoc,
+  terminate,
+} from '@angular/fire/firestore';
+import { getApp } from '@angular/fire/app';
 
 @Injectable({
   providedIn: 'root',
@@ -88,6 +98,15 @@ export class AuthService {
   }
 
   async signOut() {
+    // await terminate(this.fStore.db);
+    // await clearIndexedDbPersistence(this.fStore.db);
+    // initializeFirestore(getApp(), {
+    //   localCache: persistentLocalCache({
+    //     tabManager: persistentMultipleTabManager(),
+    //   }),
+    // });
+    this.isAuthenticated = false;
+    this.userData.set(null);
     await this.fAuth.signOut();
   }
 }

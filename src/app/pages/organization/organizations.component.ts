@@ -26,7 +26,7 @@ export class OrganizationsComponent implements OnInit {
     effect(async () => {
       if (this.fAuth.userData()?.id) {
         await this.os.getOrganizationsWhereMe();
-      }
+      } else this.os.myOrgUnits = [];
     });
   }
 

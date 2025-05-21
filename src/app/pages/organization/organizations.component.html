@@ -17,7 +17,7 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Where I am member">
+    <mat-tab label="Where I am member" [disabled]="!fAuth.isAuthenticated">
       <div class="list">
         @for (o of os.myOrgUnits; track $index) {
         @if(o.members.includes(fAuth.userData()!.id)) {
@@ -25,7 +25,7 @@
           <mat-card-header>{{ o.name }}</mat-card-header>
           <mat-card-content>{{ o.description }}</mat-card-content>
           <mat-card-actions>
-            <a mat-flat-button [routerLink]="'/organization/unit/' + o.id"
+            <a mat-flat-button [routerLink]="'/organizations/unit/' + o.id"
               >Open</a
             >
           </mat-card-actions>
@@ -34,7 +34,7 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="My Units">
+    <mat-tab label="My Units" [disabled]="!fAuth.isAuthenticated">
       <div class="list">
         @for (o of os.myOrgUnits; track $index) { @if( o.members && o.members[0]
         == fAuth.userData()!.id) {
