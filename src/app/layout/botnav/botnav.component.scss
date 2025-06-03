@@ -1,0 +1,33 @@
+@use "@scss/styles";
+@use "@scss/bpts";
+
+#container {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  height: 6rem;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem 1rem 0 0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  @include styles.mobile-edge;
+
+  #link-list {
+    width: 95%;
+    @include styles.flex-layout;
+
+    .link {
+      text-align: center;
+    }
+  }
+
+  @include bpts.md {
+    display: flex;
+}
+}

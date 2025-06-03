@@ -1,19 +1,19 @@
-@use "@src/styles.scss";
+@use "@scss/styles";
 
 nav {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   top: 0;
   z-index: 1000;
   border-radius: 0 0 0.5rem 0.5rem;
-  // filter: blur(4px);
-  // -webkit-filter: blur(4px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 #links-center {

@@ -21,7 +21,6 @@ import {
   setDoc,
   terminate,
 } from '@angular/fire/firestore';
-import { getApp } from '@angular/fire/app';
 
 @Injectable({
   providedIn: 'root',
@@ -90,6 +89,8 @@ export class AuthService {
         error = 'Wrong credentials!';
       } else if (e.message.includes('auth/too-many-requests)')) {
         error = 'Too many requests. Please try again later.';
+      } else {
+        error = 'Unknown error!';
       }
     });
 

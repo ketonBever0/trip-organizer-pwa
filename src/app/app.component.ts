@@ -4,10 +4,11 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { interval } from 'rxjs';
 import { SwUpdate } from '@angular/service-worker';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { BotnavComponent } from "./layout/botnav/botnav.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, MatSnackBarModule],
+  imports: [RouterOutlet, NavbarComponent, MatSnackBarModule, BotnavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

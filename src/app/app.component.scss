@@ -1,4 +1,5 @@
-@use "../styles";
+@use "@scss/styles";
+@use "@scss/bpts";
 
 #page-container {
   // color: #495057;
@@ -6,22 +7,38 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  padding: 4rem 0;
+  // padding: 4rem 0;
   text-align: center;
-  // min-height: 100vh;
-  background: rgb(9, 8, 51);
-  // background: linear-gradient(
-  //   118deg,
-  //   rgba(9, 8, 51, 1) 0%,
-  //   rgba(5, 9, 151, 1) 68%,
-  //   rgba(0, 11, 255, 1) 100%
-  // );
-  background: linear-gradient(140deg, #048ea0, #047887, #64539a);
   display: flex;
   justify-content: center;
   align-items: center;
   // padding-top: 6rem;
   min-height: 100vh;
+  background-color: styles.$dark-blue;
+  background: url("@assets/plane1.jpg") no-repeat,
+    linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position-y: 33%;
+  background-position-x: center;
+
+  @include bpts.lg {
+    background-color: styles.$dark-blue;
+    background: url("@assets/mobile-bg.png") no-repeat,
+      linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
+  }
+
+  @include bpts.md {
+    background-color: styles.$dark-blue;
+    background: url("@assets/mobile-bg.png") no-repeat,
+      linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
+  }
 }
 
 main {
@@ -29,8 +46,8 @@ main {
   width: 70%;
   padding: 12pt 16pt;
   border-radius: 1rem;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0, 0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 5;
   color: styles.$text-color-primary;
 }

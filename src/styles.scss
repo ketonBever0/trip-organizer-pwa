@@ -1,4 +1,3 @@
-
 html,
 body {
   height: 100%;
@@ -25,10 +24,15 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 
 $text-color-primary: rgb(210, 255, 250);
 $menu-hover-bg: #424b90;
 $margin-from-top: 3rem;
+
+@mixin mobile-edge {
+  padding: 0 0.4rem 0 0.3rem;
+}
 
 @mixin flex-layout {
   display: flex;
@@ -43,3 +47,9 @@ $margin-from-top: 3rem;
   cursor: pointer;
   transition: all 0.3s;
 }
+
+$dark-blue: #02040aff;
+$english-violet: #12151e;
+$mountbatten-pink: #7d6b7cff;
+$english-violet-2: #544f6cff;
+$english-violet-3: #4a4967ff;

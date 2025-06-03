@@ -20,7 +20,9 @@
     "baseUrl": "./",
     "paths": {
       "@app/*": ["src/app/*"],
-      "@src/*": ["src/*"]
+      "@assets/*": ["public/*"],
+      "@scss/styles": ["src/styles.scss"],
+      "@scss/bpts": ["src/breakpoints.scss"],
     }
   },
   "angularCompilerOptions": {
