@@ -1,19 +1,37 @@
 <div id="container">
   <div id="link-list">
-    <div class="link">
+    <a routerLink="" class="link" matRipple>
       <mat-icon>home</mat-icon>
-      <div>Home</div>
-    </div>
-    <div class="link">
+      <span>Home</span>
+    </a>
+    <a routerLink="tours" class="link" matRipple>
       <mat-icon>flight</mat-icon>
-      <div>Travels</div></div>
-    <div class="link">
+      <span>Travels</span>
+    </a>
+    <a routerLink="" class="link" matRipple>
       <mat-icon>home</mat-icon>
-      <div>nope</div>
-    </div>
+      <span>nope</span>
+    </a>
+    @if(fAuth.isAuthenticated == null) {
     <div class="link">
-      <mat-icon>person</mat-icon>
-      <div>Profile</div>
+      <mat-spinner diameter="36" color="#253652"></mat-spinner>
+    <!-- <span>Just a minute...</span> -->
     </div>
+    } @else {
+    <a
+      [routerLink]="fAuth.isAuthenticated ? 'profile' : 'signin'"
+      class="link"
+      matRipple
+    >
+      @if (fAuth.isAuthenticated) {
+      <img
+        id="profile-pic"
+        src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+        alt="profile picture"
+      />
+      } @else {<mat-icon>login</mat-icon>}
+      <span> @if (fAuth.isAuthenticated) {Profile} @else {Login} </span>
+    </a>
+    }
   </div>
 </div>

@@ -2,18 +2,19 @@
 @use "@scss/bpts";
 
 #page-container {
-  // color: #495057;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
-  // padding: 4rem 0;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  // padding-top: 6rem;
+  padding: 3rem 0 6rem 0;
+  width: 100%;
   min-height: 100vh;
+  height: auto !important;
   background-color: styles.$dark-blue;
   background: url("@assets/plane1.jpg") no-repeat,
     linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
@@ -35,7 +36,9 @@
     background-color: styles.$dark-blue;
     background: url("@assets/mobile-bg.png") no-repeat,
       linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
+    // transition: background-size 0.4s ease;
     background-size: cover;
+    background-attachment: fixed;
     background-position-y: center;
     background-position-x: center;
   }
@@ -44,10 +47,15 @@
 main {
   border: 1px solid #054e56;
   width: 70%;
-  padding: 12pt 16pt;
+  // min-height: auto;
+  padding: 22pt 16pt;
   border-radius: 1rem;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 5;
   color: styles.$text-color-primary;
+
+  @include bpts.md {
+    width: 85%;
+  }
 }

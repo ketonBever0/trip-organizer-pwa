@@ -47,7 +47,7 @@ export class AuthService {
     });
   }
 
-  isAuthenticated = false;
+  isAuthenticated: boolean | null = null;
 
   // userDataSuspect = new BehaviorSubject<UserType | null>(null);
   // userData = this.userDataSuspect.asObservable();
