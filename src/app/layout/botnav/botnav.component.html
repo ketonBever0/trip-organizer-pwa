@@ -1,14 +1,14 @@
 <div id="container">
   <div id="link-list">
-    <a routerLink="" class="link" matRipple>
+    <a routerLink="home" routerLinkActive="active-link" class="link" matRipple>
       <mat-icon>home</mat-icon>
       <span>Home</span>
     </a>
-    <a routerLink="tours" class="link" matRipple>
+    <a routerLink="tours" routerLinkActive="active-link" class="link" matRipple>
       <mat-icon>flight</mat-icon>
       <span>Travels</span>
     </a>
-    <a routerLink="" class="link" matRipple>
+    <a routerLink="nope" routerLinkActive="active-link" class="link" matRipple>
       <mat-icon>home</mat-icon>
       <span>nope</span>
     </a>
@@ -20,6 +20,7 @@
     } @else {
     <a
       [routerLink]="fAuth.isAuthenticated ? 'profile' : 'signin'"
+      routerLinkActive="active-link"
       class="link"
       matRipple
     >

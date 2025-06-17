@@ -3,6 +3,7 @@ import { TourChat } from './tour-chat';
 
 export type TourType = {
   id: string;
+  name: string;
   destination: string;
   startDate: Timestamp;
   endDate: Timestamp;

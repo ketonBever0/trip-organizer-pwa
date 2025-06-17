@@ -1,20 +1,7 @@
 @use "@scss/styles";
 @use "@scss/bpts";
 
-#page-container {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem 0 6rem 0;
-  width: 100%;
-  min-height: 100vh;
-  height: auto !important;
+#full-page {
   background-color: styles.$dark-blue;
   background: url("@assets/plane1.jpg") no-repeat,
     linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
@@ -23,14 +10,14 @@
   background-position-y: 33%;
   background-position-x: center;
 
-  @include bpts.lg {
-    background-color: styles.$dark-blue;
-    background: url("@assets/mobile-bg.png") no-repeat,
-      linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
-    background-size: cover;
-    background-position-y: center;
-    background-position-x: center;
-  }
+  // @include bpts.lg {
+  //   background-color: styles.$dark-blue;
+  //   background: url("@assets/mobile-bg.png") no-repeat,
+  //     linear-gradient(90deg, styles.$english-violet-2, styles.$english-violet);
+  //   background-size: cover;
+  //   background-position-y: center;
+  //   background-position-x: center;
+  // }
 
   @include bpts.md {
     background-color: styles.$dark-blue;
@@ -41,6 +28,26 @@
     background-attachment: fixed;
     background-position-y: center;
     background-position-x: center;
+  }
+}
+
+#page-container {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // padding: 3rem 0 6rem 0;
+  width: 100%;
+  min-height: 92.5vh;
+  height: auto !important;
+
+  @include bpts.md {
+    min-height: 93vh;
   }
 }
 

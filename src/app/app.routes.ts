@@ -9,8 +9,8 @@ import { authGuard } from './core/services/auth/auth.guard';
 import { CreateUnitComponent } from './pages/organization/create-unit/create-unit.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'home', pathMatch: 'full', redirectTo: '' },
+  { path: '', pathMatch: 'full', redirectTo: '' },
+  { path: 'home', component: HomeComponent, pathMatch: 'full' },
   { path: 'main', pathMatch: 'full', redirectTo: '' },
 
   {

@@ -17,6 +17,7 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
+import { AllChatsType } from '@app/core/models/tour-chat';
 
 @Injectable({
   providedIn: 'root',
@@ -113,6 +114,26 @@ export class TourService {
     const applied = [...tour.applied, this.fAuth.userData()!.id];
     await updateDoc(doc(this.fStore.db, 'tours', tour.id), {
       applied,
+    });
+  }
+
+  async getAllChats(): Promise<AllChatsType[]> {
+    return await getDocs(
+      query(
+        collection(this.fStore.db, 'tours'),
+        where('members', 'array-contains', this.fAuth.userData()!.id)
+      )
+    ).then((res) => {
+      const chats: AllChatsType[] = [];
+      res.docs.forEach((doc) => {
+        const data = doc.data();
+        chats.push({
+          id: doc.id,
+          name: data['name'],
+          lastChat: data['chat'][data['chat'].length - 1],
+        });
+      });
+      return chats;
     });
   }
 
