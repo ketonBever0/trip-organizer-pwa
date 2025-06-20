@@ -8,7 +8,7 @@
   bottom: 0;
   z-index: 1000;
   // height: 6rem;
-  width: 90%;
+  // width: 95%;
   // overflow-x: scroll;
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -32,8 +32,8 @@
       border-radius: 4rem;
       cursor: pointer;
       @include styles.flex-layout;
-      gap: 0.4rem;
       flex-direction: column;
+      gap: 0.4rem;
       color: white;
       text-decoration: none;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -42,6 +42,8 @@
         height: 1.5rem;
       }
 
+      transition: all 0.3s;
+
       @include mat.progress-spinner-overrides(
         (
           active-indicator-color: rgb(25, 2, 87),
@@ -49,7 +51,9 @@
       );
     }
     .active-link {
-      border-top: 2px solid rgb(66, 11, 162);
+      padding-top: 0.5rem;
+      border-top: 3pt solid rgb(66, 11, 162);
+      box-shadow: rgba(0, 0, 0, 0.5) 0 1pt 4pt;
     }
   }
 

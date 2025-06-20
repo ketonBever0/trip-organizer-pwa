@@ -48,6 +48,7 @@
 
   @include bpts.md {
     min-height: 93vh;
+    justify-content: start;
   }
 }
 
@@ -57,12 +58,14 @@ main {
   // min-height: auto;
   padding: 22pt 16pt;
   border-radius: 1rem;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 5;
   color: styles.$text-color-primary;
 
   @include bpts.md {
-    width: 85%;
+    width: 100%;
+    padding: unset;
+    // position: sticky;
+    min-height: 93vh;
   }
 }
