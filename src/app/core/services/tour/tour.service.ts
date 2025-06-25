@@ -121,7 +121,7 @@ export class TourService {
     return await getDocs(
       query(
         collection(this.fStore.db, 'tours'),
-        where('members', 'array-contains', this.fAuth.userData()!.id)
+        where('applied', 'array-contains', this.fAuth.userData()!.id)
       )
     ).then((res) => {
       const chats: AllChatsType[] = [];

@@ -7,9 +7,10 @@ import { ToursComponent } from './pages/main/tours/tours.component';
 import { AddTourComponent } from './pages/admin/add-tour/add-tour.component';
 import { authGuard } from './core/services/auth/auth.guard';
 import { CreateUnitComponent } from './pages/organization/create-unit/create-unit.component';
+import { MeComponent } from './pages/auth/me/me.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '' },
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent, pathMatch: 'full' },
   { path: 'main', pathMatch: 'full', redirectTo: '' },
 
@@ -22,6 +23,7 @@ export const routes: Routes = [
 
   { path: 'signup', component: RegisterComponent },
   { path: 'signin', component: LoginComponent },
+  { path: 'profile', component: MeComponent, canActivate: [authGuard] },
 
   {
     path: 'organizations',

@@ -2,6 +2,51 @@
 <div><mat-progress-bar mode="query" /></div>
 } @else { @if (!fAuth.isAuthenticated) {
 <h2>Welcome to my Travel organizer!</h2>
+<p>Please Sign In to contintue.</p>
 } @else {
-<div id="container">hello</div>
+<div id="container">
+  <div id="top-bar">
+    <button
+      mat-icon-button
+      id="back-btn"
+      [ngClass]="selectedChat != null ? '' : 'hide'"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h3>Chats</h3>
+    <button mat-icon-button id="back-btn"><mat-icon>settings</mat-icon></button>
+  </div>
+  <div id="category-selector">
+    <mat-tab-group>
+      <mat-tab label="Active">
+        <div id="list">
+          @if(chats.length == 0) { Nothing here... } @else { @for (chat of
+          chats; track $index) {
+          <div class="chat">
+            <img
+              src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+              alt=""
+            />
+            <div>
+              <span class="name">{{ chat.name }}</span>
+              <span
+                ><b>{{
+                  chat.lastChat.senderId == fAuth.userData()?.id
+                    ? "You"
+                    : chat.lastChat.senderName
+                }}</b
+                >: {{ chat.lastChat.text }}</span
+              >
+            </div>
+            <span class="date">{{
+              chat.lastChat.when.toDate() | date : "MM. dd. HH:mm"
+            }}</span>
+          </div>
+          } }
+        </div>
+      </mat-tab>
+      <mat-tab label="All"></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
 } }
