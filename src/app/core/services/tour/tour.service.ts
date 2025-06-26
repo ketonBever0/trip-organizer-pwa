@@ -15,7 +15,7 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { AllChatsType } from '@app/core/models/tour-chat';
 
@@ -117,24 +117,26 @@ export class TourService {
     });
   }
 
-  async getAllChats(): Promise<AllChatsType[]> {
-    return await getDocs(
-      query(
-        collection(this.fStore.db, 'tours'),
-        where('applied', 'array-contains', this.fAuth.userData()!.id)
-      )
-    ).then((res) => {
-      const chats: AllChatsType[] = [];
-      res.docs.forEach((doc) => {
-        const data = doc.data();
-        chats.push({
-          id: doc.id,
-          name: data['name'],
-          lastChat: data['chat'][data['chat'].length - 1],
+  getAllChats(): Observable<AllChatsType[]> {
+    return from(
+      getDocs(
+        query(
+          collection(this.fStore.db, 'tours'),
+          where('applied', 'array-contains', this.fAuth.userData()!.id)
+        )
+      ).then((res) => {
+        const chats: AllChatsType[] = [];
+        res.docs.forEach((doc) => {
+          const data = doc.data();
+          chats.push({
+            id: doc.id,
+            name: data['name'],
+            lastChat: data['chat'][data['chat'].length - 1],
+          });
         });
-      });
-      return chats;
-    });
+        return chats;
+      })
+    );
   }
 
   async sendMessage(tour: TourType, text: string) {

@@ -10,19 +10,21 @@
       mat-icon-button
       id="back-btn"
       [ngClass]="selectedChat != null ? '' : 'hide'"
+      (click)="selectChat(null)"
     >
       <mat-icon>arrow_back</mat-icon>
     </button>
     <h3>Chats</h3>
     <button mat-icon-button id="back-btn"><mat-icon>settings</mat-icon></button>
   </div>
-  <div id="category-selector">
+  @if(!selectedChat) {
+    <div id="category-selector">
     <mat-tab-group>
       <mat-tab label="Active">
         <div id="list">
           @if(chats.length == 0) { Nothing here... } @else { @for (chat of
           chats; track $index) {
-          <div class="chat" matRipple>
+          <div class="chat-element" matRipple (click)="selectChat(chat.id)">
             <img
               src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
               alt=""
@@ -48,5 +50,9 @@
       <mat-tab label="All"></mat-tab>
     </mat-tab-group>
   </div>
+  } @else {
+    <div class="chat-feed">
+    </div>
+  }
 </div>
 } }

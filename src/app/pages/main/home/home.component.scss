@@ -17,7 +17,7 @@
   #list {
     overflow-y: scroll;
 
-    .chat {
+    .chat-element {
       padding: 1rem 0;
       @include styles.flex-layout;
 

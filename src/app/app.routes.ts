@@ -11,8 +11,13 @@ import { MeComponent } from './pages/auth/me/me.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: HomeComponent, pathMatch: 'full' },
   { path: 'main', pathMatch: 'full', redirectTo: '' },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./pages/main/home/home.module').then((m) => m.HomeModule),
+    pathMatch: 'full',
+  },
 
   {
     path: 'tours',
