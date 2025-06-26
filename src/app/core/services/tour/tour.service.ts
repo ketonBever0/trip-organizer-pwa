@@ -139,6 +139,14 @@ export class TourService {
     );
   }
 
+  getTourChat(id: string): Observable<TourType> {
+    return from(
+      getDoc(doc(this.fStore.db, 'tours', id)).then((res) => {
+        return { id: res.id, ...res.data() } as TourType;
+      })
+    );
+  }
+
   async sendMessage(tour: TourType, text: string) {
     const chat = [
       ...tour.chat,

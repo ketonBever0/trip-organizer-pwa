@@ -9,7 +9,7 @@
     <button
       mat-icon-button
       id="back-btn"
-      [ngClass]="selectedChat != null ? '' : 'hide'"
+      [ngClass]="selectedChat() ? '' : 'hide'"
       (click)="selectChat(null)"
     >
       <mat-icon>arrow_back</mat-icon>
@@ -17,7 +17,7 @@
     <h3>Chats</h3>
     <button mat-icon-button id="back-btn"><mat-icon>settings</mat-icon></button>
   </div>
-  @if(!selectedChat) {
+  @if(!selectedChat()) {
     <div id="category-selector">
     <mat-tab-group>
       <mat-tab label="Active">

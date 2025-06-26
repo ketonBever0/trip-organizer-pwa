@@ -5,12 +5,14 @@ import {
   effect,
   OnDestroy,
   OnInit,
+  signal,
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { TourType } from '@app/core/models/tour';
 import { AllChatsType } from '@app/core/models/tour-chat';
 import { TruncStrPipe } from '@app/core/pipes/trunc-str.pipe';
 import { AuthService } from '@app/core/services/auth/auth.service';
@@ -35,16 +37,17 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  private closeChat$ = new Subject<void>();
   chats: AllChatsType[] = [];
-  selectedChat: string | null = null;
+  selectedChat = signal<string | null>(null);
+  currentTour: TourType | null = null;
 
   constructor(
     protected readonly fAuth: AuthService,
     protected readonly tourService: TourService
   ) {
-    effect(async () => {
+    effect(() => {
       if (fAuth.userData()?.id) {
-        // console.log(fAuth.userData()?.id);
         this.tourService
           .getAllChats()
           .pipe(takeUntil(this.destroy$))
@@ -53,10 +56,20 @@ export class HomeComponent implements OnInit, OnDestroy {
           });
       }
     });
+    effect(() => {
+      if (this.selectedChat()) {
+        tourService
+          .getTourChat(this.selectedChat()!)
+          .pipe(takeUntil(this.closeChat$))
+          .subscribe((value) => {
+            this.currentTour = value;
+          });
+      }
+    });
   }
 
   selectChat(id: string | null) {
-    this.selectedChat = id;
+    this.selectedChat.set(id);
   }
 
   async ngOnInit() {}
