@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -19,7 +20,7 @@ import { TourService } from '@app/core/services/tour/tour.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
-  imports: [MatProgressBarModule, MatIconButton, MatIconModule, MatTabsModule, DatePipe, TruncStrPipe, NgClass],
+  imports: [MatProgressBarModule, MatIconButton, MatIconModule, MatTabsModule, DatePipe, TruncStrPipe, NgClass, MatRippleModule],
 })
 export class HomeComponent implements OnInit {
   chats: AllChatsType[] = [];

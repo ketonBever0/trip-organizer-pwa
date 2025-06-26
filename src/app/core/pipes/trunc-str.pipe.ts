@@ -1,7 +1,7 @@
 import { Pipe, type PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'truncStr',
+  name: 'truncStrPipe',
 })
 export class TruncStrPipe implements PipeTransform {
   transform(str: string, limit: number = 10): string {

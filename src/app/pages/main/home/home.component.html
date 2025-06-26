@@ -22,7 +22,7 @@
         <div id="list">
           @if(chats.length == 0) { Nothing here... } @else { @for (chat of
           chats; track $index) {
-          <div class="chat">
+          <div class="chat" matRipple>
             <img
               src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
               alt=""
@@ -35,7 +35,7 @@
                     ? "You"
                     : chat.lastChat.senderName
                 }}</b
-                >: {{ chat.lastChat.text }}</span
+                >: {{ chat.lastChat.text | truncStrPipe }}</span
               >
             </div>
             <span class="date">{{
