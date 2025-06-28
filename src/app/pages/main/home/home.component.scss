@@ -55,4 +55,19 @@
       // }
     }
   }
+
+  .chat-feed {
+    min-height: 75vh;
+
+    .messages {
+      display: flex;
+      gap: 0.2rem;
+      flex-direction: column-reverse;
+    }
+
+    .input-form {
+      position: sticky;
+      bottom: 0;
+    }
+  }
 }

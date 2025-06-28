@@ -11,6 +11,7 @@ import {
   docData,
   getDoc,
   getDocs,
+  onSnapshot,
   query,
   Timestamp,
   updateDoc,
@@ -132,7 +133,7 @@ export class TourService {
           { idField: 'id' }
         ).pipe(
           map((docs) => {
-            console.log(docs);
+            // console.log(docs);
             return docs.map((doc) => ({
               id: doc['id'],
               name: doc['name'],
@@ -143,7 +144,7 @@ export class TourService {
             }));
           }),
           catchError((e) => {
-            console.log(e);
+            // console.log(e);
             return of([]);
           })
         );
@@ -152,10 +153,16 @@ export class TourService {
   }
 
   getTourChat(id: string): Observable<TourType> {
-    return from(
-      getDoc(doc(this.fStore.db, 'tours', id)).then((res) => {
-        return { id: res.id, ...res.data() } as TourType;
-      })
+    return authState(this.fAuth.fAuth).pipe(
+      switchMap((user) => {
+        if (!user) return of(null as unknown as TourType);
+        const data = docData(doc(this.fStore.db, 'tours', id), {
+          idField: 'id',
+        }) as Observable<TourType>;
+        // console.log(data);
+        return data;
+      }),
+      catchError(() => of(null as unknown as TourType))
     );
   }
 

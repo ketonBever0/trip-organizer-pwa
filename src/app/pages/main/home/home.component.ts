@@ -7,9 +7,17 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TourType } from '@app/core/models/tour';
@@ -34,6 +42,9 @@ import { Observable, Subject, takeUntil } from 'rxjs';
     NgClass,
     MatRippleModule,
     AsyncPipe,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule  
   ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
@@ -41,31 +52,41 @@ export class HomeComponent implements OnInit, OnDestroy {
   private closeChat$ = new Subject<void>();
   chats$: Observable<AllChatsType[]> = new Observable();
   selectedChat = signal<string | null>(null);
+  chat$ = new Observable<TourType>();
   currentTour: TourType | null = null;
+
+  private readonly formBuilder: FormBuilder = new FormBuilder();
+  chatForm: FormGroup;
 
   constructor(
     protected readonly fAuth: AuthService,
     protected readonly tourService: TourService
   ) {
-    effect(() => {
-      if (fAuth.userData()?.id) {
-      }
+    this.chatForm = this.formBuilder.group({
+      text: ['', Validators.required],
     });
+    // effect(() => {
+    //   if (fAuth.userData()?.id) {
+    //   }
+    // });
     effect(() => {
       if (this.selectedChat()) {
-        tourService
+        this.chat$ = tourService
           .getTourChat(this.selectedChat()!)
-          .pipe(takeUntil(this.closeChat$))
-          .subscribe((value) => {
-            this.currentTour = value;
-          });
+          .pipe(takeUntil(this.closeChat$));
       }
     });
   }
 
   selectChat(id: string | null) {
+    if (!id) {
+      this.closeChat$.next();
+      this.closeChat$.complete();
+    }
     this.selectedChat.set(id);
   }
+
+  sendChat() {}
 
   async ngOnInit() {
     this.chats$ = this.tourService.getAllChats().pipe(takeUntil(this.destroy$));
@@ -74,5 +95,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.closeChat$.next();
+    this.closeChat$.complete();
   }
 }
