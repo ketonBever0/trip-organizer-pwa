@@ -5,6 +5,7 @@ import { TourType } from '@app/core/models/tour';
 import {
   addDoc,
   collection,
+  collectionData,
   deleteDoc,
   doc,
   docData,
@@ -15,9 +16,10 @@ import {
   updateDoc,
   where,
 } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
+import { catchError, from, map, Observable, of, switchMap } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { AllChatsType } from '@app/core/models/tour-chat';
+import { authState } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -118,23 +120,33 @@ export class TourService {
   }
 
   getAllChats(): Observable<AllChatsType[]> {
-    return from(
-      getDocs(
-        query(
-          collection(this.fStore.db, 'tours'),
-          where('applied', 'array-contains', this.fAuth.userData()!.id)
-        )
-      ).then((res) => {
-        const chats: AllChatsType[] = [];
-        res.docs.forEach((doc) => {
-          const data = doc.data();
-          chats.push({
-            id: doc.id,
-            name: data['name'],
-            lastChat: data['chat'][data['chat'].length - 1],
-          });
-        });
-        return chats;
+    return authState(this.fAuth.fAuth).pipe(
+      switchMap((user) => {
+        if (!user) return of([]);
+
+        return collectionData(
+          query(
+            collection(this.fStore.db, 'tours'),
+            where('applied', 'array-contains', user.uid)
+          ),
+          { idField: 'id' }
+        ).pipe(
+          map((docs) => {
+            console.log(docs);
+            return docs.map((doc) => ({
+              id: doc['id'],
+              name: doc['name'],
+              lastChat:
+                doc['chat'] && doc['chat'].length > 0
+                  ? doc['chat'][doc['chat'].length - 1]
+                  : null,
+            }));
+          }),
+          catchError((e) => {
+            console.log(e);
+            return of([]);
+          })
+        );
       })
     );
   }

@@ -1,4 +1,4 @@
-import { DatePipe, NgClass } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +17,7 @@ import { AllChatsType } from '@app/core/models/tour-chat';
 import { TruncStrPipe } from '@app/core/pipes/trunc-str.pipe';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { TourService } from '@app/core/services/tour/tour.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -33,12 +33,13 @@ import { Subject, takeUntil } from 'rxjs';
     TruncStrPipe,
     NgClass,
     MatRippleModule,
+    AsyncPipe,
   ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   private closeChat$ = new Subject<void>();
-  chats: AllChatsType[] = [];
+  chats$: Observable<AllChatsType[]> = new Observable();
   selectedChat = signal<string | null>(null);
   currentTour: TourType | null = null;
 
@@ -48,12 +49,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {
     effect(() => {
       if (fAuth.userData()?.id) {
-        this.tourService
-          .getAllChats()
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((value) => {
-            this.chats = value;
-          });
       }
     });
     effect(() => {
@@ -72,7 +67,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.selectedChat.set(id);
   }
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    this.chats$ = this.tourService.getAllChats().pipe(takeUntil(this.destroy$));
+  }
 
   ngOnDestroy() {
     this.destroy$.next();
