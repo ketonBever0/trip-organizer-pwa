@@ -53,20 +53,35 @@
   } @else {
   <div class="chat-feed">
     <div class="messages">
-      @if(chat$ | async; as chat) { @for (msg of chat.chat.reverse(); track $index) {
+      @if(chat$ | async; as chat) { @for (msg of chat.chat.reverse(); track
+      $index) {
       <div class="msg">
-        <p>{{ msg.text }}</p>
+        @if(fAuth.userData()?.id == msg.senderId) {
+        <div class="my-msg">{{ msg.text }}</div>
+        } @else {
+        <div class="others-msg">
+          <b>{{ msg.senderName }}</b
+          >: {{ msg.text }}
+        </div>
+        }
       </div>
       } }
     </div>
-    <form [formGroup]="chatForm" (ngSubmit)="sendChat()" class="input-form">
-      <mat-form-field>
-        <mat-label for="text">Your message</mat-label>
-        <input matInput type="text" id="text" formControlName="text" />
-      </mat-form-field>
-      <button type="submit">Send</button>
-    </form>
   </div>
+  <form [formGroup]="chatForm" (ngSubmit)="sendChat()" class="input-form">
+    <div class="text-input">
+      <input
+        matInput
+        type="text"
+        id="text"
+        formControlName="text"
+        placeholder="Send Message"
+      />
+      <button matIconButton type="submit">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </form>
   }
 </div>
 } }

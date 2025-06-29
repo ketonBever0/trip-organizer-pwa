@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,7 +44,9 @@ import { Observable, Subject, takeUntil } from 'rxjs';
     AsyncPipe,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule  
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
   ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
