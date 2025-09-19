@@ -31,7 +31,6 @@ import { Observable, Subject, takeUntil } from 'rxjs';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
   imports: [
     MatProgressBarModule,
     MatIconButton,

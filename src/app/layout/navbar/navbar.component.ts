@@ -21,7 +21,7 @@ import { ClickStopPropagationDirective } from '@app/core/directives/click-stop-p
     MatExpansionModule,
     MatTreeModule,
     NgIf,
-    ClickStopPropagationDirective
+    ClickStopPropagationDirective,
   ],
 })
 export class NavbarComponent implements OnInit {
@@ -33,16 +33,14 @@ export class NavbarComponent implements OnInit {
   }
 
   profileMenuOpen: boolean = false;
-  toggleProfileMenu() {
+  toggleProfileMenu(state = false) {
     this.profileMenuOpen = !this.profileMenuOpen;
   }
 
-
   logout() {
-    this.profileMenuOpen = false;
     this.authService.signOut();
+    this.toggleProfileMenu();
   }
-
 
   ngOnInit() {}
 }
