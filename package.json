@@ -8,7 +8,7 @@
   "scripts": {
     "ng": "ng",
     "dev": "vite",
-    "start": "npm run dev",
+    "start": "yarn dev",
     "build": "vite build",
     "watch": "vite build --watch",
     "test": "vitest",
