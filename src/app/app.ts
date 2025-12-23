@@ -4,14 +4,15 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
-  template: `<router-outlet />`,
-  styles: `
-    :host {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem;
-      text-align: center;
-    }
+  template: `
+    <div class="min-h-screen">
+      <nav class="sticky p-5">
+        NAVBAR
+      </nav>
+      <main class="flex justify-center">
+        <router-outlet />
+      </main>
+    </div>
   `,
 })
 export class App {}
