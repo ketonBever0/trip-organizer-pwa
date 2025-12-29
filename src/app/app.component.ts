@@ -5,7 +5,7 @@ import { interval, Subject, takeUntil } from 'rxjs';
 import { SwUpdate } from '@angular/service-worker';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { BotnavComponent } from './layout/botnav/botnav.component';
-import { connect } from '@rxjs-insights/devtools/connect';
+// import { connect } from '@rxjs-insights/devtools/connect';
 
 @Component({
   selector: 'app-root',
