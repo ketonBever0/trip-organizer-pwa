@@ -12,15 +12,20 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     mainFields: ['module'],
   },
-  plugins: [
-    analog(),
-    tailwindcss()
-  ],
+  plugins: [analog(), tailwindcss()],
+  ssr: {
+    noExternal: ['@ionic/**', '@stencil/**', 'ionicons'],
+  },
   test: {
     globals: true,
     environment: 'jsdom',
     setupFiles: ['src/test-setup.ts'],
     include: ['**/*.spec.ts'],
     reporters: ['default'],
+    server: {
+      deps: {
+        inline: ['@ionic/angular'],
+      },
+    },
   },
 }));
