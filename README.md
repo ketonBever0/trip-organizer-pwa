@@ -1,5 +1,13 @@
 # trip-organizer-pwa
 
+# ENV (`src/app/env.ts`: export const env)
+
+- firebaseCfg
+- apiHost
+- apiVersion (default is always set)
+
+## INFO
+
 This project was generated with [Analog](https://analogjs.org), the fullstack meta-framework for Angular.
 
 ## Setup

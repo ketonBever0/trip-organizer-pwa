@@ -45,4 +45,4 @@ Thumbs.db
 
 # Environment files
 .env*
-src/app/env.ts
+src/env.ts
