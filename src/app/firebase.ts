@@ -1,11 +1,21 @@
-class FirebaseConnection {
-  private constructor() {}
+import env from '@src/env';
+import { FirebaseApp, initializeApp } from 'firebase/app';
+import { Firestore, getFirestore } from 'firebase/firestore';
 
-  static #inst: FirebaseConnection;
+export class FirebasePool {
+  static #inst: FirebasePool;
 
-  public static get inst(): FirebaseConnection {
-    if (!FirebaseConnection.#inst)
-      FirebaseConnection.#inst = new FirebaseConnection();
-    return FirebaseConnection.#inst;
+  private constructor() {
+    this.app = initializeApp(env.firebaseCfg);
+    this.db = getFirestore(this.app);
+  }
+
+  app: FirebaseApp;
+  db: Firestore;
+
+  public static get inst(): FirebasePool {
+    if (!FirebasePool.#inst)
+      FirebasePool.#inst = new FirebasePool();
+    return FirebasePool.#inst;
   }
 }
