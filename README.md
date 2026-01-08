@@ -1,6 +1,6 @@
 # trip-organizer-pwa
 
-# ENV (`src/app/env.ts`: export const env)
+# ENV (`src/env.ts`: export const env)
 
 - firebaseCfg
 - apiHost
