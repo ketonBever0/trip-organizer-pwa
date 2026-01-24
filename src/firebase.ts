@@ -1,6 +1,6 @@
-import env from '@src/env';
+import env from './env';
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { Firestore, getFirestore } from 'firebase/firestore';
+import { collection, Firestore, getFirestore } from 'firebase/firestore';
 import { Auth, getAuth } from 'firebase/auth';
 
 class FirebasePool {
@@ -15,12 +15,11 @@ class FirebasePool {
   private app: FirebaseApp;
   db: Firestore;
   auth: Auth;
-  
 
-  public static get inst(): FirebasePool {
-    if (!FirebasePool.#inst)
-      FirebasePool.#inst = new FirebasePool();
-    return FirebasePool.#inst;
+  tables = { users: 'users' };
+
+  static get inst(): FirebasePool {
+    return (FirebasePool.#inst ??= new FirebasePool());
   }
 }
-export default FirebasePool.inst;
+export const fb = FirebasePool.inst;

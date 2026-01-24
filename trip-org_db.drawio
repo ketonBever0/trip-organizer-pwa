@@ -1,0 +1,37 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.0 Chrome/140.0.7339.249 Electron/38.7.2 Safari/537.36" version="29.3.0">
+  <diagram name="1 oldal" id="4W6KgwJphqOfKrH8FzUk">
+    <mxGraphModel dx="906" dy="544" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yDM32TV-thUB-mwHlaq--1" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="User" vertex="1">
+          <mxGeometry height="260" width="160" x="160" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="yDM32TV-thUB-mwHlaq--2" parent="yDM32TV-thUB-mwHlaq--1" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="#id&lt;div&gt;+email&lt;br&gt;&lt;div&gt;+name&lt;/div&gt;&lt;div&gt;-nick&lt;/div&gt;&lt;div&gt;-pictureUrl&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="210" width="160" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SE0CxiwwoHfZV2HnkS75-1" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="Organization" vertex="1">
+          <mxGeometry height="240" width="160" x="533" y="125" as="geometry" />
+        </mxCell>
+        <mxCell id="SE0CxiwwoHfZV2HnkS75-2" parent="SE0CxiwwoHfZV2HnkS75-1" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="#id&lt;div&gt;+name&lt;/div&gt;&lt;div&gt;+isPrivate&lt;/div&gt;&lt;div&gt;+description&lt;/div&gt;" vertex="1">
+          <mxGeometry height="190" width="160" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="SE0CxiwwoHfZV2HnkS75-4" edge="1" parent="1" source="yDM32TV-thUB-mwHlaq--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;endArrow=ERzeroToMany;endFill=0;" target="SE0CxiwwoHfZV2HnkS75-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SE0CxiwwoHfZV2HnkS75-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="Ownership" vertex="1">
+          <mxGeometry height="30" width="80" x="380" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="SE0CxiwwoHfZV2HnkS75-6" edge="1" parent="1" source="yDM32TV-thUB-mwHlaq--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;endArrow=ERzeroToMany;endFill=0;" target="SE0CxiwwoHfZV2HnkS75-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="290" as="sourcePoint" />
+            <mxPoint x="643" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SE0CxiwwoHfZV2HnkS75-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;autosize=1;resizable=0;" value="Membership" vertex="1">
+          <mxGeometry height="30" width="90" x="375" y="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
