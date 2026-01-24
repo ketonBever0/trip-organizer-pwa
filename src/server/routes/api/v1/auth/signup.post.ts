@@ -19,11 +19,11 @@ export default defineEventHandler(async (event) => {
       body.password,
     );
 
-    await setDoc(doc(fb.db, fb.tables.users, creds.user.uid), {
+    await fb.admin.db.collection(fb.tables.users).doc(creds.user.uid).create({
       email: body.email,
       name: body.name,
       nick: body.nick,
-      pictureUrl: "",
+      pictureUrl: '',
     });
 
     setResponseStatus(event, 201);

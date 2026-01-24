@@ -18,7 +18,10 @@ export default defineEventHandler(async (e: H3Event) => {
   )
     .then(async (creds) => {
       res.token = await creds.user.getIdToken();
-      res.user = await getDoc(doc(fb.db, fb.tables.users, creds.user.uid));
+      res.user = await fb.admin.db
+        .collection(fb.tables.users)
+        .doc(creds.user.uid)
+        .get().then(data => data.data() as {});
     })
     .catch((e: FirebaseError) => {
       return e.code;
@@ -37,7 +40,7 @@ export default defineEventHandler(async (e: H3Event) => {
         errMsg = 'Wrong password!';
         status = 400;
         break;
-        case 'auth/invalid-credential':
+      case 'auth/invalid-credential':
         errMsg = 'Wrong e-mail or password!';
         status = 400;
         break;
