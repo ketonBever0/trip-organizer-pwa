@@ -5,8 +5,8 @@ import {
   setResponseStatus,
 } from 'h3';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
 import { fb } from '../../../../../firebase';
+import { fbAdmin } from '../../../../firebase-admin';
 import { FirebaseError } from 'firebase/app';
 
 export default defineEventHandler(async (event) => {
@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
       body.password,
     );
 
-    await fb.admin.db.collection(fb.tables.users).doc(creds.user.uid).create({
+    await fbAdmin.admin.db.collection(fb.tables.users).doc(creds.user.uid).create({
       email: body.email,
       name: body.name,
       nick: body.nick,

@@ -1,8 +1,8 @@
 import { createError, defineEventHandler, H3Event, readBody } from 'h3';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { fb } from '../../../../../firebase';
+import { fbAdmin } from '../../../../firebase-admin';
 import { FirebaseError } from 'firebase/app';
-import { doc, getDoc } from 'firebase/firestore';
 
 export default defineEventHandler(async (e: H3Event) => {
   const body = await readBody(e);
@@ -18,7 +18,7 @@ export default defineEventHandler(async (e: H3Event) => {
   )
     .then(async (creds) => {
       res.token = await creds.user.getIdToken();
-      res.user = await fb.admin.db
+      res.user = await fbAdmin.admin.db
         .collection(fb.tables.users)
         .doc(creds.user.uid)
         .get().then(data => data.data() as {});
