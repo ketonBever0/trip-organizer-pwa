@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
       body.password,
     );
 
-    await fbAdmin.admin.db.collection(fb.tables.users).doc(creds.user.uid).create({
+    await fbAdmin.db.collection(fb.tables.users).doc(creds.user.uid).create({
       email: body.email,
       name: body.name,
       nick: body.nick,

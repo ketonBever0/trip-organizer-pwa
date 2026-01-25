@@ -6,10 +6,7 @@ import { FirebaseError } from 'firebase/app';
 
 export default defineEventHandler(async (e: H3Event) => {
   const body = await readBody(e);
-  let res = {
-    token: '',
-    user: {},
-  };
+  let res: any = {};
 
   const error = await signInWithEmailAndPassword(
     fb.auth,
@@ -18,10 +15,12 @@ export default defineEventHandler(async (e: H3Event) => {
   )
     .then(async (creds) => {
       res.token = await creds.user.getIdToken();
-      res.user = await fbAdmin.admin.db
+      res.user = await fbAdmin.db
         .collection(fb.tables.users)
         .doc(creds.user.uid)
-        .get().then(data => data.data() as {});
+        .get()
+        .then((data) => data.data() as {});
+      res.user.id = creds.user.uid;
     })
     .catch((e: FirebaseError) => {
       return e.code;

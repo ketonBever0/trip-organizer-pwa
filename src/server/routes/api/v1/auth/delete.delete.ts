@@ -11,8 +11,8 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    await fbAdmin.admin.auth.deleteUser(body.uid);
-    await fbAdmin.admin.db.collection(fb.tables.users).doc(body.uid).delete();
+    await fbAdmin.auth.deleteUser(body.uid);
+    await fbAdmin.db.collection(fb.tables.users).doc(body.uid).delete();
 
     setResponseStatus(event, 200);
     return {

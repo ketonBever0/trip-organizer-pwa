@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { defineCustomElements } from 'ionicons/loader';
 import {
   IonApp,
   IonRouterOutlet,
@@ -14,8 +15,9 @@ import {
   IonList,
   IonItem,
   IonRouterLink,
+  IonIcon,
+  IonButton,
 } from '@ionic/angular/standalone';
-
 
 @Component({
   selector: 'app-root',
@@ -35,6 +37,8 @@ import {
     IonItem,
     RouterLink,
     IonRouterLink,
+    IonIcon,
+    IonButton,
   ],
   template: `
     <ion-app ngSkipHydration class="min-h-screen">
@@ -57,13 +61,7 @@ import {
             </ion-avatar>
             <p>name</p>
           </div>
-          <ion-list class="mt-4">
-            <ion-item>
-              <ion-button routerLink="login" routerDirection="forward">
-                Ugrás a részletekre
-              </ion-button>
-            </ion-item>
-          </ion-list>
+          <ion-list class="mt-4"> </ion-list>
         </ion-content>
       </ion-menu>
 
@@ -75,16 +73,24 @@ import {
               <ion-menu-button></ion-menu-button>
             </ion-buttons>
             <ion-title>Menu</ion-title>
+            <ion-buttons slot="end">
+              <ion-button>
+                <ion-icon name="log-in-outline" size="large"></ion-icon>Login
+              </ion-button>
+            </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
+          <ion-icon name="log-in-outline" size="large" color="primary"></ion-icon>
           <ion-router-outlet />
         </ion-content>
       </div>
     </ion-app>
   `,
 })
-export class App {
+export class App implements OnInit {
   constructor() {}
 
+  ngOnInit(): void {
+  }
 }

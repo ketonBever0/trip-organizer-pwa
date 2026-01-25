@@ -12,9 +12,9 @@ class FirebasePool {
     this.auth = getAuth(this.app);
   }
 
-  private app: FirebaseApp;
-  db: Firestore;
-  auth: Auth;
+  private readonly app: FirebaseApp;
+  readonly db: Firestore;
+  readonly auth: Auth;
 
   tables = { users: 'users' };
 

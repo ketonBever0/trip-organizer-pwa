@@ -12,18 +12,14 @@ class FirebaseAdminPool {
         privateKey: env.firebaseAdmin.private_key.replace(/\\n/g, '\n'),
       }),
     });
-    this.admin = {
-      auth: admin.auth(),
-      db: admin.firestore(),
-      apiKey: env.firebaseCfg.apiKey
-    };
+    ((this.auth = admin.auth()),
+      (this.db = admin.firestore()),
+      (this.apiKey = env.firebaseCfg.apiKey));
   }
 
-  admin: {
-    db: admin.firestore.Firestore;
-    auth: admin.auth.Auth;
-    apiKey: string;
-  };
+  readonly db: admin.firestore.Firestore;
+  readonly auth: admin.auth.Auth;
+  private readonly apiKey: string;
 
   static get inst(): FirebaseAdminPool {
     return (FirebaseAdminPool.#inst ??= new FirebaseAdminPool());
