@@ -11,7 +11,11 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { provideFileRouter, requestContextInterceptor, withDebugRoutes } from '@analogjs/router';
+import {
+  provideFileRouter,
+  requestContextInterceptor,
+  withDebugRoutes,
+} from '@analogjs/router';
 import {
   IonicRouteStrategy,
   provideIonicAngular,
@@ -24,10 +28,10 @@ export const appConfig: ApplicationConfig = {
     provideFileRouter(withDebugRoutes()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([requestContextInterceptor])
+      withInterceptors([requestContextInterceptor]),
     ),
     provideClientHydration(withEventReplay()),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideIonicAngular()
+    provideIonicAngular({}),
   ],
 };

@@ -1,10 +1,13 @@
 import { Component, OnInit, signal } from '@angular/core';
-import axios from 'axios';
+import { IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'home-page',
   standalone: true,
-  template: ` <p></p> `,
+  template: `
+    <p></p>
+  `,
+  imports: [IonIcon],
 })
 export default class HomePage implements OnInit {
   constructor() {}

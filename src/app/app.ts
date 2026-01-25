@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { defineCustomElements } from 'ionicons/loader';
 import {
   IonApp,
   IonRouterOutlet,
@@ -18,6 +16,8 @@ import {
   IonIcon,
   IonButton,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { logInOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -34,9 +34,6 @@ import {
     IonMenuButton,
     IonAvatar,
     IonList,
-    IonItem,
-    RouterLink,
-    IonRouterLink,
     IonIcon,
     IonButton,
   ],
@@ -75,13 +72,12 @@ import {
             <ion-title>Menu</ion-title>
             <ion-buttons slot="end">
               <ion-button>
-                <ion-icon name="log-in-outline" size="large"></ion-icon>Login
+                <ion-icon name="log-in-outline" size="large"></ion-icon>
               </ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <ion-icon name="log-in-outline" size="large" color="primary"></ion-icon>
           <ion-router-outlet />
         </ion-content>
       </div>
@@ -89,8 +85,9 @@ import {
   `,
 })
 export class App implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {
+  constructor() {
+    addIcons({logInOutline});
   }
+
+  ngOnInit(): void {}
 }
