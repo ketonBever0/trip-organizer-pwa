@@ -1,5 +1,4 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { IonIcon } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'home-page',
@@ -7,7 +6,7 @@ import { IonIcon } from "@ionic/angular/standalone";
   template: `
     <p></p>
   `,
-  imports: [IonIcon],
+  imports: [],
 })
 export default class HomePage implements OnInit {
   constructor() {}
