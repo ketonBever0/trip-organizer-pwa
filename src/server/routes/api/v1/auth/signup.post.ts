@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
 
     await fbAdmin.db.collection(fb.tables.users).doc(creds.user.uid).create({
       email: body.email,
-      name: body.name,
+      fullName: body.fullName,
       nick: body.nick,
       pictureUrl: '',
     });

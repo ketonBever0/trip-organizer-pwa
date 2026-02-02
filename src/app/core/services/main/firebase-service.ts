@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fb } from '../../../firebase';
+import { fb } from '../../../../firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,6 @@ export class FirebaseService {
 
   constructor() {}
 
-  
+
 
 }
