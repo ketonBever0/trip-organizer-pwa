@@ -1,8 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { IonApp, IonRouterOutlet, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonMenuButton, IonAvatar, IonList, IonItem, IonRouterLink, IonIcon, IonButton, IonRouterLinkWithHref } from '@ionic/angular/standalone';
+import {
+  IonApp,
+  IonRouterOutlet,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonButtons,
+  IonMenuButton,
+  IonAvatar,
+  IonList,
+  IonItem,
+  IonRouterLink,
+  IonIcon,
+  IonButton,
+  IonRouterLinkWithHref,
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { logInOutline } from 'ionicons/icons';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +36,10 @@ import { RouterLink } from "@angular/router";
     IonMenuButton,
     IonAvatar,
     IonList,
-    IonIcon,
     IonButton,
-    IonRouterLinkWithHref,
     IonRouterLink,
-    RouterLink
-],
+    RouterLink,
+  ],
   template: `
     <ion-app ngSkipHydration class="min-h-screen">
       <!-- DRAWER -->
@@ -59,12 +74,10 @@ import { RouterLink } from "@angular/router";
             </ion-buttons>
             <ion-title>Menu</ion-title>
             <ion-buttons slot="end">
-              <ion-button [routerLink]="['/signup']">
-                Sign Up
-              </ion-button>
-              <ion-button [routerLink]="['/login']">
+              <ion-button [routerLink]="['/auth']"> Login now </ion-button>
+              <!-- <ion-button [routerLink]="['/login']">
                 Login
-              </ion-button>
+              </ion-button> -->
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
@@ -77,7 +90,7 @@ import { RouterLink } from "@angular/router";
 })
 export class App implements OnInit {
   constructor() {
-    addIcons({logInOutline});
+    addIcons({ logInOutline });
   }
 
   ngOnInit(): void {}
