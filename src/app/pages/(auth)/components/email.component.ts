@@ -47,7 +47,7 @@ import { IonTabs } from '@ionic/angular/common';
       (ngSubmit)="emailSubmit()"
       [formGroup]="emailForm"
     >
-      <ion-button id="opt-google" class="text-white bg-none" size="small">
+      <ion-button id="opt-google" class="text-white py-2" size="small">
         <!-- <ion-icon slot="start" name="logo-google" /> -->
         <p style="color: #4285f4;">G</p>
         <p style="color: #db4437;">O</p>
@@ -111,7 +111,7 @@ export class EmailComponent implements OnInit {
         return;
       }
       sessionStorage.setItem('saved', res ? 'login' : 'signup');
-      sessionStorage.setItem('email', this.emailForm.value);
+      sessionStorage.setItem('email', this.emailForm.value['email']);
       this.emailSetEvent.emit(this.emailForm.value.email);
       this.tabChangeEvent.emit(res ? 'login' : 'signup');
     }

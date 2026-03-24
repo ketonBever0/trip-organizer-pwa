@@ -1,4 +1,4 @@
-import env from '../env';
+import { env } from '../env';
 import admin from 'firebase-admin';
 
 class FirebaseAdminPool {
@@ -14,7 +14,7 @@ class FirebaseAdminPool {
     });
     ((this.auth = admin.auth()),
       (this.db = admin.firestore()),
-      (this.apiKey = env.firebaseCfg.apiKey));
+      (this.apiKey = env.firebaseConfig.apiKey));
   }
 
   readonly db: admin.firestore.Firestore;

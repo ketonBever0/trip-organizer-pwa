@@ -71,13 +71,17 @@ import { RouterLink } from '@angular/router';
           <ion-toolbar>
             <ion-buttons slot="start">
               <ion-menu-button></ion-menu-button>
+              <ion-title class="cursor-pointer" [routerLink]="['/']"
+                >Menu</ion-title
+              >
             </ion-buttons>
-            <ion-title>Menu</ion-title>
+            <ion-buttons class="flex justify-center">
+              <ion-button [routerLink]="['/']">Home</ion-button>
+              <ion-button [routerLink]="['/trips']">Trips</ion-button>
+              <ion-button [routerLink]="['/']">About</ion-button>
+            </ion-buttons>
             <ion-buttons slot="end">
-              <ion-button [routerLink]="['/auth']"> Login now </ion-button>
-              <!-- <ion-button [routerLink]="['/login']">
-                Login
-              </ion-button> -->
+              <ion-button [routerLink]="['/auth']">Login now</ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>

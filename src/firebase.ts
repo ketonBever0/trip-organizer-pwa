@@ -1,4 +1,4 @@
-import env from './env';
+import { env } from './env';
 import { FirebaseApp, initializeApp } from 'firebase/app';
 import { Firestore, getFirestore } from 'firebase/firestore';
 import { Auth, getAuth } from 'firebase/auth';
@@ -7,7 +7,7 @@ class FirebasePool {
   static #inst: FirebasePool;
 
   private constructor() {
-    this.app = initializeApp(env.firebaseCfg);
+    this.app = initializeApp(env.firebaseConfig);
     this.db = getFirestore(this.app);
     this.auth = getAuth(this.app);
   }

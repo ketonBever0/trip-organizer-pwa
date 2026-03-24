@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,17 +11,14 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    
-`,
+  template: ``,
 })
 export class HeaderComponent implements OnInit {
   // private readonly service = inject(Service);
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     // Initialization logic here
   }
-
 }

@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonTabs, IonTab } from '@ionic/angular/standalone';
 import { EmailComponent } from './components/email.component';
@@ -19,7 +25,10 @@ import { Signup } from './components/signup.component';
         </ion-tab>
         <ion-tab tab="login"> Login </ion-tab>
         <ion-tab tab="signup">
-          <signup-component (tabChangeEvent)="onTabChange($event)" />
+          <signup-component
+            (tabChangeEvent)="onTabChange($event)"
+            [email]="email"
+          />
         </ion-tab>
       </ion-tabs>
     </div>
@@ -27,7 +36,7 @@ import { Signup } from './components/signup.component';
   imports: [ReactiveFormsModule, IonTabs, IonTab, EmailComponent, Signup],
 })
 export default class AuthPage implements AfterViewInit {
-  constructor() {}
+  constructor(private readonly cdr: ChangeDetectorRef) {}
 
   @ViewChild('authTabs') tabs!: IonTabs;
 
@@ -46,6 +55,7 @@ export default class AuthPage implements AfterViewInit {
     if (saved && ['login', 'signup'].includes(saved)) {
       this.email = sessionStorage.getItem('email');
       this.tabs.select(saved);
+      this.cdr.detectChanges();
     }
     // sessionStorage.removeItem('saved');
   }
