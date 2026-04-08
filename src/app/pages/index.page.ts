@@ -4,7 +4,9 @@ import { Component, OnInit, signal } from '@angular/core';
   selector: 'home-page',
   standalone: true,
   template: `
-    <p></p>
+    <div class="flex">
+      <p>main</p>
+    </div>
   `,
   imports: [],
 })

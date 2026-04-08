@@ -47,17 +47,7 @@ import { RouterLink } from '@angular/router';
     IonSegment,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: `
-    ion-segment {
-      flex-direction: column;
-      height: auto;
-    }
-
-    ion-segment-button {
-      width: 100%;
-      justify-content: flex-start;
-    }
-  `,
+  styles: ``,
   template: `
     <ion-header>
       <ion-toolbar>
@@ -69,32 +59,12 @@ import { RouterLink } from '@angular/router';
             >Trip4live</ion-title
           >
         </ion-buttons>
-        <ion-buttons class="flex justify-center">
-          <ion-button [routerLink]="['/']">Home</ion-button>
-          <ion-button [routerLink]="['/trips']">Trips</ion-button>
-          <ion-button [routerLink]="['/']">About</ion-button>
-        </ion-buttons>
+
         <ion-buttons slot="end">
           <ion-button [routerLink]="['/auth']">Login now</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <div class="sticky top-0 left-0 w-20">
-      <ion-segment value="heart" class="flex clex-col">
-        <ion-segment-button value="home">
-          <ion-icon name="home"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="heart">
-          <ion-icon name="heart"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="pin">
-          <ion-icon name="pin"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button value="star">
-          <ion-icon name="star"></ion-icon>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
   `,
 })
 export class HeaderComponent implements OnInit {
