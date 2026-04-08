@@ -1,0 +1,7 @@
+{
+  "name": "Trip4live",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
