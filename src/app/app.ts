@@ -18,8 +18,9 @@ import {
   IonRouterLinkWithHref,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { logInOutline } from 'ionicons/icons';
+import { closeOutline, logInOutline } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
+import { HeaderComponent } from './layout/sections/header.component';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,8 @@ import { RouterLink } from '@angular/router';
     IonButton,
     IonRouterLink,
     RouterLink,
+    IonIcon,
+    HeaderComponent,
   ],
   template: `
     <ion-app ngSkipHydration class="min-h-screen">
@@ -46,7 +49,10 @@ import { RouterLink } from '@angular/router';
       <ion-menu contentId="main-content">
         <ion-header>
           <ion-toolbar>
-            <ion-title>Menu Content</ion-title>
+            <div class="flex justify-between p-2">
+              <ion-icon name="close-outline" size="large" />
+              <span class="text-2xl">Menu Content</span>
+            </div>
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
@@ -67,24 +73,7 @@ import { RouterLink } from '@angular/router';
 
       <!-- PAGE -->
       <div class="ion-page" id="main-content">
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-menu-button></ion-menu-button>
-              <ion-title class="cursor-pointer" [routerLink]="['/']"
-                >Menu</ion-title
-              >
-            </ion-buttons>
-            <ion-buttons class="flex justify-center">
-              <ion-button [routerLink]="['/']">Home</ion-button>
-              <ion-button [routerLink]="['/trips']">Trips</ion-button>
-              <ion-button [routerLink]="['/']">About</ion-button>
-            </ion-buttons>
-            <ion-buttons slot="end">
-              <ion-button [routerLink]="['/auth']">Login now</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
+        <app-header />
         <ion-content class="ion-padding">
           <ion-router-outlet />
         </ion-content>
@@ -94,7 +83,7 @@ import { RouterLink } from '@angular/router';
 })
 export class App implements OnInit {
   constructor() {
-    addIcons({ logInOutline });
+    addIcons({ logInOutline, closeOutline });
   }
 
   ngOnInit(): void {}
