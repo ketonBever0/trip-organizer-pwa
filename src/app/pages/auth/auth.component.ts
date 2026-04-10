@@ -8,13 +8,14 @@ import {
 import { IonicModule, IonTabs } from '@ionic/angular';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { EmailLoginComponent } from './login/email-login/email-login.component';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
   standalone: true,
-  imports: [IonicModule, LoginComponent, SignupComponent],
+  imports: [IonicModule, LoginComponent, SignupComponent, EmailLoginComponent],
 })
 export class AuthComponent implements OnInit, AfterViewInit {
   constructor(private readonly cdr: ChangeDetectorRef) {}
@@ -35,7 +36,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const saved = sessionStorage.getItem('saved');
-    if (saved && ['login', 'signup'].includes(saved)) {
+    if (saved && ['login', 'signup', 'email'].includes(saved)) {
       this.email = sessionStorage.getItem('email');
       this.tabs.select(saved);
       this.cdr.detectChanges();

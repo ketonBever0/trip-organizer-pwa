@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()" defaultHref="/auth" />
+    </ion-buttons>
+    <ion-title>Sign In</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="py-32">
+  <div class="text-center pb-4">
+    <h1>Sign In</h1>
+    <p>
+      Please enter password for <b>{{ email }}</b
+      >.
+    </p>
+  </div>
+
+  <form
+    class="py-6 flex flex-col gap-4 justify-center items-center *:w-xs"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="this.passwordForm"
+  >
+    <div class="*:rounded-2xl">
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="floating"
+          placeholder="********"
+          type="password"
+          formControlName="password"
+          errorText="This can not be empty"
+          required
+        />
+      </ion-item>
+    </div>
+    <div class="flex flex-col">
+      <ion-button type="submit" [disabled]="loggingIn">Proceed</ion-button>
+    </div>
+  </form>
+</div>

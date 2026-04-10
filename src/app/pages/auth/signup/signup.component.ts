@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
   back() {
     sessionStorage.removeItem('saved');
     sessionStorage.removeItem('email');
-    this.tabChangeEvent.emit('email');
+    this.tabChangeEvent.emit('login');
   }
 
   signupForm: FormGroup;
@@ -58,12 +58,22 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    await this.authService.signUpWithEmail(
+    const error = await this.authService.signUpWithEmail(
       this.email!,
       this.signupForm.value.password,
       this.signupForm.value.name,
       this.signupForm.value.nick || null,
     );
+
+    if (!error) this.back();
+    else {
+      const toast = await this.toastController.create({
+        message: error,
+        duration: 5000,
+        position: 'bottom',
+      });
+      await toast.present();
+    }
   }
 
   ngOnInit(): void {}

@@ -51,7 +51,10 @@ export class AuthService {
       });
   }
 
-  async login(email: string, password: string): Promise<string | null> {
+  async loginWithEmail(
+    email: string,
+    password: string,
+  ): Promise<string | null> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
       return null;

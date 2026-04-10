@@ -50,10 +50,10 @@ export class LoginComponent implements OnInit {
       if (typeof res === 'string') {
         return;
       }
-      sessionStorage.setItem('saved', res ? 'login' : 'signup');
+      sessionStorage.setItem('saved', res ? 'email' : 'signup');
       sessionStorage.setItem('email', this.emailForm.value['email']);
       this.emailSetEvent.emit(this.emailForm.value.email);
-      this.tabChangeEvent.emit(res ? 'login' : 'signup');
+      this.tabChangeEvent.emit(res ? 'email' : 'signup');
     }
   }
 
