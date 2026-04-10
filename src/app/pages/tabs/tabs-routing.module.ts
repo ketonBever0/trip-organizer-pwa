@@ -21,6 +21,7 @@ const routes: Routes = [
         path: 'me',
         loadChildren: () => import('./me/me.module').then((m) => m.MeTabModule),
       },
+      { path: '', pathMatch: 'full', redirectTo: 'home' },
       {
         path: '**',
         redirectTo: '',

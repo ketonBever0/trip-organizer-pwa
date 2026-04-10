@@ -14,8 +14,6 @@ const routes: Routes = [
       import('./pages/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
 
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-
   {
     path: '**',
     redirectTo: '',
