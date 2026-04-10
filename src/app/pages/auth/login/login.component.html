@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/me" />
+    </ion-buttons>
+    <ion-title>Authentication</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<h1 class="text-center">Login or Sign Up</h1>
+<p class="text-center">with</p>
+<form
+  class="py-6 flex flex-col gap-4 justify-center items-center *:w-xs"
+  (ngSubmit)="emailSubmit()"
+  [formGroup]="this.emailForm"
+>
+  <ion-button id="opt-google" class="text-white py-2" size="small">
+    <!-- <ion-icon slot="start" name="logo-google" /> -->
+    <p style="color: #4285f4">G</p>
+    <p style="color: #db4437">O</p>
+    <p style="color: #f4b400">O</p>
+    <p style="color: #4285f4">G</p>
+    <p style="color: #0f9d58">L</p>
+    <p style="color: #db4437">E</p>
+  </ion-button>
+  <p class="text-center">or</p>
+  <div class="*:rounded-2xl">
+    <ion-item>
+      <ion-input
+        label="Email"
+        labelPlacement="floating"
+        placeholder="some@domain.com"
+        type="email"
+        formControlName="email"
+        errorText="Enter a valid email"
+        required
+      />
+    </ion-item>
+  </div>
+  <div class="flex flex-col">
+    <ion-button type="submit" [disabled]="emailChecking">Proceed</ion-button>
+  </div>
+</form>

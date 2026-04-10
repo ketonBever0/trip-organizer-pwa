@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="back()" defaultHref="/auth" />
+    </ion-buttons>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="ion-padding py-32">
+  <div class="text-center pb-4">
+    <h1>Sign Up</h1>
+    <p>Email {{ email }} was not found.</p>
+  </div>
+
+  <form
+    [formGroup]="signupForm"
+    (ngSubmit)="onSubmit()"
+    class="flex justify-center"
+  >
+    <div class="*:rounded-2xl flex gap-2 justify-items-center flex-col mt-4">
+      <div class="flex justify-center flex-row gap-3 *:rounded-2xl">
+        <ion-item>
+          <ion-input
+            label="Your Name"
+            labelPlacement="floating"
+            type="text"
+            formControlName="name"
+            [errorText]="['Minimum length 2']"
+          />
+        </ion-item>
+        <ion-item>
+          <ion-input
+            label="Nick Name"
+            labelPlacement="floating"
+            type="text"
+            formControlName="nick"
+            [errorText]="['Minimum length 2 or empty']"
+          />
+        </ion-item>
+      </div>
+      <ion-item>
+        <ion-input
+          label="Password"
+          labelPlacement="floating"
+          type="password"
+          formControlName="password"
+          [errorText]="['Minimum length 8']"
+        />
+      </ion-item>
+      <ion-item>
+        <ion-input
+          label="Password Again"
+          labelPlacement="floating"
+          type="password"
+          formControlName="confirmPassword"
+          [errorText]="['Both passwords must match']"
+        />
+      </ion-item>
+      <ion-button type="submit">Confirm</ion-button>
+    </div>
+  </form>
+</div>

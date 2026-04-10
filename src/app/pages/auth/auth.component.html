@@ -1,0 +1,17 @@
+<div>
+  <ion-tabs #authTabs>
+    <ion-tab tab="email">
+      <login-component
+        (tabChangeEvent)="onTabChange($event)"
+        (emailSetEvent)="onEmailSet($event)"
+      />
+    </ion-tab>
+    <ion-tab tab="login"> Login </ion-tab>
+    <ion-tab tab="signup">
+      <signup-component
+        (tabChangeEvent)="onTabChange($event)"
+        [email]="email"
+      />
+    </ion-tab>
+  </ion-tabs>
+</div>
