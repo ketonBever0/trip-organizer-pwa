@@ -1,0 +1,16 @@
+<ion-content>
+  <ion-list>
+    @for (chat of chats; track chat.id) {
+      <ion-item button>
+        <ion-avatar slot="start">
+          <img [src]="chat.avatar" alt="Avatar" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ chat.name }}</h2>
+          <p>{{ chat.lastMessage }}</p>
+        </ion-label>
+        <ion-note slot="end">{{ chat.time }}</ion-note>
+      </ion-item>
+    }
+  </ion-list>
+</ion-content>
