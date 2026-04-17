@@ -25,7 +25,8 @@ export class SignupComponent implements OnInit {
     // addIcons({ arrowUndo });
     this.signupForm = this.formBuilder.group(
       {
-        name: ['', [Validators.required, Validators.minLength(2)]],
+        firstname: ['', [Validators.required, Validators.minLength(2)]],
+        lastname: ['', [Validators.required, Validators.minLength(2)]],
         nick: ['', [Validators.minLength(2)]],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: [''],
@@ -61,7 +62,8 @@ export class SignupComponent implements OnInit {
     const error = await this.authService.signUpWithEmail(
       this.email!,
       this.signupForm.value.password,
-      this.signupForm.value.name,
+      this.signupForm.value.firstname,
+      this.signupForm.value.lastname,
       this.signupForm.value.nick || null,
     );
 

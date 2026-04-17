@@ -11,7 +11,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="ion-padding">
+  <div class="">
+    @if (authService.userData$ | async; as user) {
     <div class="py-4 d-flex justify-items-center">
       <ion-avatar>
         <img
@@ -19,9 +20,25 @@
           src="https://ionicframework.com/docs/img/demos/avatar.svg"
         />
       </ion-avatar>
+      <h2>{{user | username}}</h2>
     </div>
+    <ion-list>
+      <ion-list>
+        <ion-item button detail="false" lines="none">
+          <ion-icon name="return-up-back-outline"></ion-icon>
+          <ion-label>My Previous Trips</ion-label>
+        </ion-item>
+
+        <ion-item button detail="false" lines="none" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-list>
+    } @else {
     <ion-button expand="block" routerLink="/auth"
       >Login or Create Account</ion-button
     >
+    }
   </div>
 </ion-content>

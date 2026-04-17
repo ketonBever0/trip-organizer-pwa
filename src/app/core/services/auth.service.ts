@@ -39,6 +39,10 @@ export class AuthService {
     ),
   );
 
+  async logout() {
+    await this.auth.signOut();
+  }
+
   async checkEmail(email: string): Promise<boolean | string> {
     return await getDocs(
       query(collection(this.firestore, 'users'), where('email', '==', email)),
@@ -66,7 +70,8 @@ export class AuthService {
   async signUpWithEmail(
     email: string,
     password: string,
-    name: string,
+    firstname: string,
+    lastname: string,
     nick?: string,
   ): Promise<string | null> {
     try {
@@ -78,8 +83,9 @@ export class AuthService {
 
       const userDoc = {
         email: res.user.email!,
-        name,
-        nick,
+        firstname,
+        lastname,
+        nick: nick == '' || null ? null : nick,
       };
 
       await setDoc(doc(this.firestore, 'users', res.user.uid), userDoc);

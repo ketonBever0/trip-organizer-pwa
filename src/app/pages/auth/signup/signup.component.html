@@ -22,23 +22,33 @@
       <div class="flex justify-center flex-row gap-3 *:rounded-2xl">
         <ion-item>
           <ion-input
-            label="Your Name"
+            label="First Name"
             labelPlacement="floating"
             type="text"
-            formControlName="name"
+            formControlName="firstname"
             [errorText]="['Minimum length 2']"
           />
         </ion-item>
         <ion-item>
           <ion-input
-            label="Nick Name"
+            label="Last Name"
             labelPlacement="floating"
             type="text"
-            formControlName="nick"
+            formControlName="lastname"
             [errorText]="['Minimum length 2 or empty']"
           />
         </ion-item>
       </div>
+      <ion-item>
+        <ion-input
+          label="Do you want a Nick name?"
+          placeholder="If not, leave it empty."
+          labelPlacement="floating"
+          type="text"
+          formControlName="nick"
+          [errorText]="['Minimum length 8']"
+        />
+      </ion-item>
       <ion-item>
         <ion-input
           label="Password"

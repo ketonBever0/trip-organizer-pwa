@@ -33,10 +33,10 @@ export class EmailLoginComponent implements OnInit {
   @Input() email!: string | null;
   @Output() tabChangeEvent = new EventEmitter<string>();
 
-  back() {
+  back(loggedIn = false) {
     sessionStorage.removeItem('saved');
     sessionStorage.removeItem('email');
-    this.tabChangeEvent.emit('login');
+    if (!loggedIn) this.tabChangeEvent.emit('login');
   }
 
   loggingIn = false;
@@ -50,6 +50,7 @@ export class EmailLoginComponent implements OnInit {
     );
     if (!error) {
       this.router.navigate(['/home']).then(async () => {
+        this.back(true);
         const toast = await this.toastController.create({
           message: 'Welcome back!',
           duration: 5000,
