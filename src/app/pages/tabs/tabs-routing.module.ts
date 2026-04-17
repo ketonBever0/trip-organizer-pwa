@@ -13,9 +13,16 @@ const routes: Routes = [
           import('./home/home.module').then((m) => m.HomeTabModule),
       },
       {
-        path: 'trip',
+        path: 'trips',
         loadChildren: () =>
           import('./trips/trips.module').then((m) => m.TripsTabModule),
+      },
+      {
+        path: 'organizations',
+        loadChildren: () =>
+          import('./organizations/organizations.module').then(
+            (m) => m.OrganizationsTabModule,
+          ),
       },
       {
         path: 'me',

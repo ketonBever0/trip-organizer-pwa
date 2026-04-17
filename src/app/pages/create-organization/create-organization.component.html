@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/me" />
+    </ion-buttons>
+    <ion-title>New Organization</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding py-32">
+  <h2 class="text-center">Create Your Organization</h2>
+
+  <form [formGroup]="createOrgForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-input
+          formControlName="name"
+          label="Name"
+          placeholder="Enter your organization name"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item class="flex py-6">
+        <ion-select
+          label="Type"
+          interface="popover"
+          placeholder="Select One"
+          (ionChange)="changeSelectedOrgType($event)"
+        >
+          @for (opt of orgTypeOptions; track opt.id) {
+            <ion-select-option [value]="opt.value">{{
+              opt.text
+            }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-textarea
+          formControlName="description"
+          label="Please tell us something"
+        ></ion-textarea>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" type="submit">Create</ion-button>
+  </form>
+</ion-content>

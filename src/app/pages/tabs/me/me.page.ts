@@ -10,7 +10,7 @@ import { UsernamePipe } from '@utilities/pipes/username.pipe';
   templateUrl: 'me.page.html',
   styleUrls: ['me.page.scss'],
   standalone: true,
-  imports: [IonicModule, RouterLink, AsyncPipe, UsernamePipe],
+  imports: [IonicModule, RouterLink, AsyncPipe, UsernamePipe, RouterLink],
 })
 export class MeTab {
   constructor() {}

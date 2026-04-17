@@ -24,20 +24,22 @@ import { Observable, of, Subscription, switchMap } from 'rxjs';
 })
 export class AuthService {
   constructor(
-    private readonly auth: Auth,
-    private readonly firestore: Firestore,
+    readonly auth: Auth,
+    private readonly db: Firestore,
   ) {}
 
   private authUser$ = user(this.auth);
   userData$ = this.authUser$.pipe(
     switchMap((aUser) =>
       aUser
-        ? (docData(
-            doc(this.firestore, 'users', aUser.uid),
-          ) as Observable<User | null>)
+        ? (docData(doc(this.db, 'users', aUser.uid)) as Observable<User | null>)
         : of(null),
     ),
   );
+
+  getUserRef() {
+    return doc(this.db, 'users', this.auth.currentUser!.uid);
+  }
 
   async logout() {
     await this.auth.signOut();
@@ -45,7 +47,7 @@ export class AuthService {
 
   async checkEmail(email: string): Promise<boolean | string> {
     return await getDocs(
-      query(collection(this.firestore, 'users'), where('email', '==', email)),
+      query(collection(this.db, 'users'), where('email', '==', email)),
     )
       .then((doc) => {
         return !doc.empty;
@@ -88,7 +90,7 @@ export class AuthService {
         nick: nick == '' || null ? null : nick,
       };
 
-      await setDoc(doc(this.firestore, 'users', res.user.uid), userDoc);
+      await setDoc(doc(this.db, 'users', res.user.uid), userDoc);
 
       return null;
     } catch (e) {

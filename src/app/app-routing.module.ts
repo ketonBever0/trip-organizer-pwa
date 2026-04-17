@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './pages/auth/auth.component';
+import { CreateOrganizationComponent } from './pages/create-organization/create-organization.component';
+import { authGuard } from './core/guards/auth-guard';
 
 const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'create-org',
+    component: CreateOrganizationComponent,
+    canActivate: [authGuard],
   },
   {
     path: '',
