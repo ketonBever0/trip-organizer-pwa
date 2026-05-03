@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -23,10 +23,10 @@ import { Observable, of, Subscription, switchMap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    readonly auth: Auth,
-    private readonly db: Firestore,
-  ) {}
+  constructor() {}
+
+  readonly auth = inject(Auth);
+  private readonly db = inject(Firestore);
 
   private authUser$ = user(this.auth);
   userData$ = this.authUser$.pipe(

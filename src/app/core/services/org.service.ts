@@ -12,13 +12,16 @@ import {
   query,
   where,
 } from '@angular/fire/firestore';
+import { decodeRef } from '@utilities/functions/DocRefFunctions';
+import { User } from '@models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrgService {
-  constructor(private readonly db: Firestore) {}
+  constructor() {}
 
+  private readonly db = inject(Firestore);
   private readonly authService = inject(AuthService);
 
   orgs: Organization[] = [];
@@ -26,8 +29,13 @@ export class OrgService {
 
   async getOrgs() {
     const docs = await getDocs(collection(this.db, this.collName));
-    docs.forEach((doc) => {
-      this.orgs.push({ id: doc.id, ...doc.data() } as Organization);
+    docs.forEach(async (doc) => {
+      const data = doc.data();
+      const newData = {
+        id: doc.id,
+        ...data,
+      } as Organization;
+      newData.owner = await decodeRef<User>(data['ownerRef']);
     });
   }
 
@@ -56,14 +64,20 @@ export class OrgService {
       }
     })();
 
-    const docs = await getDocs(
-      query(collection(this.db, this.collName), queryConstraint),
-    );
+    const docs = (
+      await getDocs(query(collection(this.db, this.collName), queryConstraint))
+    ).docs;
 
-    let result: Organization[] = [];
-    docs.forEach((org) => {
-      result.push({ id: org.id, ...org.data() } as Organization);
-    });
+    let result = await Promise.all(
+      docs.map(async (org) => {
+        const data = org.data();
+        return {
+          id: org.id,
+          ...data,
+          // ownerRef: await decodeRef<User>(data['ownerRef']),
+        } as Organization;
+      }),
+    );
 
     return result;
   }

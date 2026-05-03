@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-refresher
+    slot="fixed"
+    [pullFactor]="0.5"
+    [pullMin]="100"
+    [pullMax]="200"
+    (ionRefresh)="refresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  @for (org of orgs; track org.id) {
+    <ion-list>
+      <ion-item button>
+        <ion-label>
+          <h2>{{ org.name }}</h2>
+          <p>{{ org.description }}</p>
+        </ion-label>
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  }
+</ion-content>

@@ -1,5 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Organizations</ion-title>
+    <ion-title class="ion-padding">Organizations by Roles</ion-title>
+    <ion-segment value="all">
+      <ion-segment-button value="all" contentId="all">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="owner" contentId="owner">
+        <ion-label>Owner</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="admin" contentId="admin">
+        <ion-label>admin</ion-label>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
+
+<ion-content class="ion-padding">
+  <ion-segment-view>
+    <ion-segment-content id="all"
+      ><orgs-all [orgs]="orgs"
+    /></ion-segment-content>
+    <ion-segment-content id="owner"
+      ><orgs-all [orgs]="ownedOrgs"
+    /></ion-segment-content>
+    <ion-segment-content id="admin" (refreshParent)="getOrgs($event)"
+      >admin</ion-segment-content
+    >
+  </ion-segment-view>
+</ion-content>
