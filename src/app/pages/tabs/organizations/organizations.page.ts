@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, RefresherCustomEvent } from '@ionic/angular';
 import { OrgService } from '@services/org.service';
 import { AllComponent } from './all/all.component';
 import { AuthService } from '@services/auth.service';
@@ -28,11 +28,14 @@ export class OrganizationsTab implements OnInit {
     });
   }
 
-  async getOrgs(e: Event | null = null) {
+  async refresh(e: RefresherCustomEvent) {
+    await this.getOrgs();
+  }
+
+  async getOrgs() {
     this.orgs = await this.orgService.getWhereIamMember();
     this.ownedOrgs = this.orgs.filter(
       (org) => org.ownerRef.path == this.authService.getUserRef().path,
     );
-    console.log('asd');
   }
 }

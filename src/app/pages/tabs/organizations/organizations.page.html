@@ -18,13 +18,11 @@
 <ion-content class="ion-padding">
   <ion-segment-view>
     <ion-segment-content id="all"
-      ><orgs-all [orgs]="orgs"
+      ><orgs-all [orgs]="orgs" (refreshParent)="refresh($event)"
     /></ion-segment-content>
     <ion-segment-content id="owner"
-      ><orgs-all [orgs]="ownedOrgs"
+      ><orgs-all [orgs]="ownedOrgs" (refreshParent)="refresh($event)"
     /></ion-segment-content>
-    <ion-segment-content id="admin" (refreshParent)="getOrgs($event)"
-      >admin</ion-segment-content
-    >
+    <ion-segment-content id="admin">admin</ion-segment-content>
   </ion-segment-view>
 </ion-content>

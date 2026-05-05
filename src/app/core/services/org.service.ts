@@ -5,6 +5,7 @@ import {
   addDoc,
   collection,
   doc,
+  docData,
   Firestore,
   getDoc,
   getDocs,
@@ -14,6 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import { decodeRef } from '@utilities/functions/DocRefFunctions';
 import { User } from '@models/user.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -80,6 +82,11 @@ export class OrgService {
     );
 
     return result;
+  }
+
+  getOrgById(id: string) {
+    const ref = doc(this.db, this.collName, id);
+    return docData(ref, { idField: 'id' }) as Observable<Organization>;
   }
 
   async createOrg(

@@ -1,0 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="organizations" />
+    </ion-buttons>
+    @if (org$ | async; as org) {
+      <ion-title class="ion-padding">
+        {{ org.name }}
+      </ion-title>
+    }
+  </ion-toolbar>
+</ion-header>
