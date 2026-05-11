@@ -1,13 +1,12 @@
-import { Timestamp } from '@angular/fire/firestore';
+import { DocumentReference, Timestamp } from '@angular/fire/firestore';
 import { Departure } from './departure.model';
 import { User } from './user.model';
 import { Chat } from './chat.model';
 import { Program } from './program.model';
-import { Organization } from './organization.model';
 
 export interface Trip {
   id: string;
-  organizer: Organization;
+  organizerRef: DocumentReference;
   destination: string;
   startDate: Timestamp;
   endDate: Timestamp;
