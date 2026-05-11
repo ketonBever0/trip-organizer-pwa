@@ -1,6 +1,7 @@
 import { DocumentReference } from '@angular/fire/firestore';
 import { Trip } from './trip.model';
 import { User } from './user.model';
+import { Chat } from './chat.model';
 
 export interface Organization {
   id: string;
@@ -15,4 +16,5 @@ export interface Organization {
   members: User[];
   guestRefs: DocumentReference[];
   guests: User[];
+  chat: Chat[];
 }

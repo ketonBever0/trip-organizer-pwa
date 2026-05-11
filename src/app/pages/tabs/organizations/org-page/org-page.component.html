@@ -10,3 +10,26 @@
     }
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  <div></div>
+  <div>
+    <h2>Members</h2>
+    @if (org$ | async; as org) {
+      <h4>Owner</h4>
+      <ion-list> {{ org.owner.firstname }} {{ org.owner.lastname }} </ion-list>
+      <h4>Admins</h4>
+      <ion-list></ion-list>
+      <h4>Members</h4>
+      <ion-list></ion-list>
+      <h4>Guests</h4>
+      <ion-list></ion-list>
+    }
+  </div>
+
+  <div>
+    <h2>About</h2>
+    @if (org$ | async; as org) {
+      {{ org.description }}
+    }
+  </div>
+</ion-content>

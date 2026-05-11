@@ -15,7 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import { decodeRef } from '@utilities/functions/DocRefFunctions';
 import { User } from '@models/user.model';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -86,8 +86,57 @@ export class OrgService {
 
   getOrgById(id: string) {
     const ref = doc(this.db, this.collName, id);
-    return docData(ref, { idField: 'id' }) as Observable<Organization>;
+    const orgDoc = docData(ref, { idField: 'id' }) as Observable<Organization>;
+    return orgDoc.pipe(
+      switchMap((res: Organization) => {
+        const ownerDoc$ = docData(doc(this.db, res.ownerRef.path), {
+          idField: 'id',
+        });
+
+        const adminDocs$ = res.adminRefs.length
+          ? res.adminRefs.map((ref: any) =>
+              docData(doc(this.db, ref.path), { idField: 'id' }),
+            )
+          : of([]);
+
+        const memberDocs$ = res.memberRefs.length
+          ? res.memberRefs.map((ref: any) =>
+              docData(doc(this.db, ref.path), { idField: 'id' }),
+            )
+          : of([]);
+
+        const guestDocs$ = res.guestRefs.length
+          ? res.guestRefs.map((ref: any) =>
+              docData(doc(this.db, ref.path), { idField: 'id' }),
+            )
+          : of([]);
+
+        return combineLatest([
+          ownerDoc$,
+          combineLatest(adminDocs$),
+          combineLatest(memberDocs$),
+          combineLatest(guestDocs$),
+        ]).pipe(
+          map(([owner, admins, members, guests]) => ({
+            ...res,
+            owner,
+            admins,
+            members,
+            guests,
+          })),
+        );
+      }),
+    );
   }
+
+  // getOrgMembers(org: Organization) {
+  //   const ref = doc(this.db, this.collName, org.id);
+  //   return docData(ref).pipe(
+  //     map((doc: Organization) => {
+  //       doc;
+  //     }),
+  //   );
+  // }
 
   async createOrg(
     name: string,
