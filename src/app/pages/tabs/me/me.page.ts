@@ -20,4 +20,6 @@ export class MeTab {
   logout() {
     this.authService.logout();
   }
+
+  async addUsers() {}
 }

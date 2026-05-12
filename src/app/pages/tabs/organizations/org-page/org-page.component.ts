@@ -1,10 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { Organization } from '@models/organization.model';
 import { OrgService } from '@services/org.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-org-page',
@@ -13,21 +13,32 @@ import { map, Observable } from 'rxjs';
   standalone: true,
   imports: [IonicModule, AsyncPipe],
 })
-export class OrgPageComponent implements OnInit {
+export class OrgPageComponent implements OnInit, OnDestroy {
   private readonly orgService = inject(OrgService);
 
   id!: string;
   org$!: Observable<any>;
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.paramMap.pipe(map((params) => params.get('id'))).subscribe({
-      next: (id) => {
-        if (id) {
-          this.org$ = this.orgService.getOrgById(id);
-        }
-      },
-    });
+    this.route.paramMap
+      .pipe(
+        takeUntil(this.destroy$),
+        map((params) => params.get('id')),
+      )
+      .subscribe({
+        next: (id) => {
+          if (id) {
+            this.org$ = this.orgService.getOrgById(id);
+          }
+        },
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
